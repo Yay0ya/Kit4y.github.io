@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>CSAPP又双叒叕来一遍之计算机系统漫游 | Kitty萌新的卧室</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="说在前面的一些废话，如果你困了，请直接跳至正文刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话123如果你全力投身学习本书的概念，完全理解底层计算机系统以及它对应用程序的影响那么你会走向为数不多的“大牛”的道路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP又双叒叕来一遍之计算机系统漫游">
+<meta property="og:url" content="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/index.html">
+<meta property="og:site_name" content="Kitty萌新的卧室">
+<meta property="og:description" content="说在前面的一些废话，如果你困了，请直接跳至正文刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话123如果你全力投身学习本书的概念，完全理解底层计算机系统以及它对应用程序的影响那么你会走向为数不多的“大牛”的道路">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/huibian.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/1-4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/1-9.png">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/chouxiang.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/1-13.png">
+<meta property="og:updated_time" content="2018-12-05T19:22:32.499Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSAPP又双叒叕来一遍之计算机系统漫游">
+<meta name="twitter:description" content="说在前面的一些废话，如果你困了，请直接跳至正文刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话123如果你全力投身学习本书的概念，完全理解底层计算机系统以及它对应用程序的影响那么你会走向为数不多的“大牛”的道路">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/huibian.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Kitty萌新的卧室" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>7</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-CSAPP又双叒叕来一遍之计算机系统漫游" class="wow slideInRight article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/" class="article-date">
+  <time class="post-time" datetime="2018-12-03T15:47:13.000Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSAPP又双叒叕来一遍之计算机系统漫游
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="说在前面的一些废话，如果你困了，请直接跳至正文"><a href="#说在前面的一些废话，如果你困了，请直接跳至正文" class="headerlink" title="说在前面的一些废话，如果你困了，请直接跳至正文"></a>说在前面的一些废话，如果你困了，请直接跳至正文</h2><h5 id="刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话"><a href="#刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话" class="headerlink" title="刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话"></a>刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">如果你全力投身学习本书的概念，完全理解底层计算机系统以及它对应用程序的影响</span><br><span class="line"></span><br><span class="line">那么你会走向为数不多的“大牛”的道路</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="好一个大牛的道路，对于热爱计算机的人来说的“大牛的道路”-和-爱好钱财的人的“富婆包养路”（或者是富萝莉）"><a href="#好一个大牛的道路，对于热爱计算机的人来说的“大牛的道路”-和-爱好钱财的人的“富婆包养路”（或者是富萝莉）" class="headerlink" title="好一个大牛的道路，对于热爱计算机的人来说的“大牛的道路” 和 爱好钱财的人的“富婆包养路”（或者是富萝莉）"></a>好一个大牛的道路，对于热爱计算机的人来说的“大牛的道路” 和 爱好钱财的人的“富婆包养路”（或者是富萝莉）</h5><p>在这句话的驱动下（多少人和我一样啊），这本书是我花费最多时间和精力去啃的专业书籍<br>这本书确实无敌到能让一个完全不懂的孩童般见识到了计算机专业广阔无垠、波澜壮阔的海洋。<br>惭愧的是完全没有达到大牛们啃完后通彻计算机系统的境界<br>即便是如此我还是受益匪浅，CSAPP无愧为计算机专业的神书！<br>如今我已经大二，按理说是踌躇满志的时候，我却满是遗憾，遗憾自己大一后半学期的固步自封，<br>浪费了那么多宝贵的青春年华在毫无意义的事物上，追求短暂的愉悦却荒芜了年华。</p>
+<h4 id="但是往昔不可忆，切记不要再浪费自己的青春和元气。"><a href="#但是往昔不可忆，切记不要再浪费自己的青春和元气。" class="headerlink" title="但是往昔不可忆，切记不要再浪费自己的青春和元气。"></a>但是往昔不可忆，切记不要再浪费自己的青春和元气。</h4><h2 id="所以重整旗鼓，这回想认真总结一下（感言结束，疯狂暗示-安利）"><a href="#所以重整旗鼓，这回想认真总结一下（感言结束，疯狂暗示-安利）" class="headerlink" title="所以重整旗鼓，这回想认真总结一下（感言结束，疯狂暗示+安利）"></a>所以重整旗鼓，这回想认真总结一下（感言结束，疯狂暗示+安利）</h2><h3 id="一、分析hello-c的例子，从其生命周期分析系统的执行过程"><a href="#一、分析hello-c的例子，从其生命周期分析系统的执行过程" class="headerlink" title="一、分析hello.c的例子，从其生命周期分析系统的执行过程"></a>一、分析hello.c的例子，从其生命周期分析系统的执行过程</h3><p>hello.c 源代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">   printf(&quot;hello world&quot;);</span><br><span class="line">   return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在Unix系统上,从源文件到目标文件的转化是由编译器驱动程序完成的:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix&gt;gcc -o hello hello.c</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/huibian.jpg" alt="1"></p>
+<h4 id="执行这四个阶段的程序-预处理器、编译器、汇编器、链接器-一起构成了编译系统-compilation-system"><a href="#执行这四个阶段的程序-预处理器、编译器、汇编器、链接器-一起构成了编译系统-compilation-system" class="headerlink" title="执行这四个阶段的程序(预处理器、编译器、汇编器、链接器)一起构成了编译系统(compilation system)."></a>执行这四个阶段的程序(预处理器、编译器、汇编器、链接器)一起构成了编译系统(compilation system).</h4><ol>
+<li>预处理阶段:也就是对程序进行预处理。C程序中特指“”#“”包含的库文件。预处理器将库文件直接导入到源代码中，<br>此例就是将头文件“stdio.h”导入到源程序中，生成hello.i源代码。</li>
+<li>编译阶段:编译器(ccl)将文本文件hello.i翻译成文本文件hello.s,它包含一个汇编语言程序.</li>
+<li>汇编阶段: 将汇编语言转化为机器指令,生成二进制文件——hello.o。</li>
+<li>链接阶段.目标文件合并到我们的hello.o程序中,链接器就处理这种合并.得到hello文件,一个可执行目标文件,可以被加载到内存中,由系统执行.</li>
+</ol>
+<h3 id="二、信息就是位-上下文"><a href="#二、信息就是位-上下文" class="headerlink" title="二、信息就是位+上下文"></a>二、信息就是位+上下文</h3><p>源程序实际上就是由一个值0和1组成的位(bit)序列,8个位被组织成一组,称为字节.每个字节表示程序中某个文本字符.<br>大部分现代系统都是有ASCII标准表示文本字符,只由ASCII字符构成的文件称为文本文件,所有其他文件都称为二进制文件<br>系统中所有的信息—–包括磁盘文件、存储器中的程序、存储器中存放的用户数据以及网络上传送的数据,都是由一串位表示的.区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文.比如:在不同的上下文中,一个同样的字节序列可能表示一个整数、浮点数、字符串或者机器指令. </p>
+<h3 id="三、系统的硬件组成"><a href="#三、系统的硬件组成" class="headerlink" title="三、系统的硬件组成"></a>三、系统的硬件组成</h3><p><img src="/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/1-4.jpg" alt="2"><br><strong>CPU</strong>:中央处理单元 &ensp; <strong>ALU</strong>:算术/逻辑单元 &ensp;<strong>PC</strong>:程序计数器 &ensp;<strong>USB</strong>:通用串行总线</p>
+<ul>
+<li>总线贯穿整个系统的是一组电子管道,称做总线,它携带信息字节并负责在各个部件间传递.</li>
+<li>I/O设备:输入/输出(I/O)设备是系统与外部世界的联系通道</li>
+<li>主存:主存是一个临时存储设备,在处理器执行程序时,用来存放程序和程序处理的数据.</li>
+<li>处理器:中央处理单元(CPU),简称处理器,是解释(或执行)存储在主存中指令的引擎.<br>处理器的核心是一个字长的存储设备(或寄存器),称为程序计数器(PC).</li>
+</ul>
+<h3 id="四、存储设备形成层次结构"><a href="#四、存储设备形成层次结构" class="headerlink" title="四、存储设备形成层次结构"></a>四、存储设备形成层次结构</h3><p>存储器层次结构的主要思想是一层上的存储器作为低一层存储器的高速缓存.<br><img src="/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/1-9.png" alt="3"></p>
+<h3 id="五、线程进程，单独分离写了个博客，这里不重复"><a href="#五、线程进程，单独分离写了个博客，这里不重复" class="headerlink" title="五、线程进程，单独分离写了个博客，这里不重复"></a>五、线程进程，单独分离写了个博客，这里不重复</h3><h3 id="六、计算机系统中抽象的重要性"><a href="#六、计算机系统中抽象的重要性" class="headerlink" title="六、计算机系统中抽象的重要性"></a>六、计算机系统中抽象的重要性</h3><ul>
+<li>文件是对I/O的抽象</li>
+<li>虚拟存储器是对程序存储器的抽象.</li>
+<li>进程是对一个正在运行的程序的抽象.</li>
+<li>虚拟机,它提供对整个计算机(操作系统,处理器和程序)的抽象.</li>
+</ul>
+<p><img src="/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/chouxiang.jpg" alt="4"></p>
+<h3 id="七、虚拟内存"><a href="#七、虚拟内存" class="headerlink" title="七、虚拟内存"></a>七、虚拟内存</h3><h4 id="虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程都在独占地使用主存。"><a href="#虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程都在独占地使用主存。" class="headerlink" title="虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程都在独占地使用主存。"></a>虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程都在独占地使用主存。</h4><h4 id="每个进程看到的内存都是一致的，称为虚拟地址空间。在linux中，进程的虚拟地址空间如下图"><a href="#每个进程看到的内存都是一致的，称为虚拟地址空间。在linux中，进程的虚拟地址空间如下图" class="headerlink" title="每个进程看到的内存都是一致的，称为虚拟地址空间。在linux中，进程的虚拟地址空间如下图"></a>每个进程看到的内存都是一致的，称为虚拟地址空间。在linux中，进程的虚拟地址空间如下图</h4><p><img src="/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/1-13.png" alt="3"></p>
+<ul>
+<li><p>程序代码和数据：对于所有进程来说，代码从一固定地址开始，紧接和C全局变量相对应的数据位置。第七章研究链接和加载时，学到更多有关地址空间的内容。</p>
+</li>
+<li><p>堆 ：代码和数据区紧随着运行时堆。代码和数据区是在进程一开始就被规定了大小，与此不同，调用malloc和free时堆动态的扩展和收缩。第9章学习管理虚拟存储器时，详细研究。</p>
+</li>
+<li><p>共享库：地址空间的中间部分存放C标准库和数学库这样共享库代码和数据的区域。共享库概念非常强大，相当难懂。第七章详解。</p>
+</li>
+<li><p>栈: 用户虚拟地址顶部的是用户栈，编译器用它来实现函数调用。和堆一样，在执行时动态的扩展和收缩。第三章详解。</p>
+</li>
+<li><p>内核虚拟内存。 内核总是驻留在内存中，是操作系统一部分。</p>
+</li>
+</ul>
+<h3 id="总结：由于本章只是计算机漫游，故只阐释了计算机的大概，具体细节后面章节，慢慢展开"><a href="#总结：由于本章只是计算机漫游，故只阐释了计算机的大概，具体细节后面章节，慢慢展开" class="headerlink" title="总结：由于本章只是计算机漫游，故只阐释了计算机的大概，具体细节后面章节，慢慢展开"></a>总结：由于本章只是计算机漫游，故只阐释了计算机的大概，具体细节后面章节，慢慢展开</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/" data-id="cjpe61ztj0002nottef0jz3xa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/06/CSAPP又双叒叕来一遍之程序的机器级表示/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSAPP又双叒叕来一遍之程序的机器级表示
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/03/多线程和多进程的暧昧缠绵/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">多线程和多进程的暧昧缠绵</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Kitty萌新的卧室</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>7</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Kit4y" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.hirworld.xyz/" target="_blank" title="曹神">
+          曹神
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Kitty<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/" title="" class="menuItem">KittyHome</a>
+          
+            <a href="https://github.com/Kit4y" title="" class="menuItem">gayhub</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

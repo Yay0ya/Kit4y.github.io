@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>多线程和多进程的暧昧缠绵 | Kitty萌新的卧室</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为1进程是资源分配的最小单位，线程是CPU调度的最小单位 据说这句话拿去考试,改卷老师一定会给高分，但是还是嘚深入了解一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程和多进程的暧昧缠绵">
+<meta property="og:url" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/index.html">
+<meta property="og:site_name" content="Kitty萌新的卧室">
+<meta property="og:description" content="先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为1进程是资源分配的最小单位，线程是CPU调度的最小单位 据说这句话拿去考试,改卷老师一定会给高分，但是还是嘚深入了解一下">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/duibi.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/1.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/3.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/4.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/5.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/6.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/7.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/8.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/9.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/10.jpg">
+<meta property="og:updated_time" content="2018-12-03T16:55:44.601Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程和多进程的暧昧缠绵">
+<meta name="twitter:description" content="先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为1进程是资源分配的最小单位，线程是CPU调度的最小单位 据说这句话拿去考试,改卷老师一定会给高分，但是还是嘚深入了解一下">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/duibi.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Kitty萌新的卧室" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>7</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-多线程和多进程的暧昧缠绵" class="wow slideInRight article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/03/多线程和多进程的暧昧缠绵/" class="article-date">
+  <time class="post-time" datetime="2018-12-03T15:01:18.000Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      多线程和多进程的暧昧缠绵
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为"><a href="#先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为" class="headerlink" title="先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为"></a>先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">进程是资源分配的最小单位，线程是CPU调度的最小单位</span><br></pre></td></tr></table></figure>
+<p>据说这句话拿去考试,改卷老师一定会给高分，但是还是嘚深入了解一下<br><a id="more"></a></p>
+<h4 id="线程的定义："><a href="#线程的定义：" class="headerlink" title="线程的定义："></a>线程的定义：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。</span><br><span class="line">一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，</span><br><span class="line">每条线程并行执行不同的任务。一个线程是一个execution context（执行上下文）</span><br><span class="line">即一个cpu执行时所需要的一串指令。</span><br></pre></td></tr></table></figure>
+<h4 id="线程的工作方式类比："><a href="#线程的工作方式类比：" class="headerlink" title="线程的工作方式类比："></a>线程的工作方式类比：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">假设你正在读一本书，没有读完，你想休息一下，但是你想在回来时恢复到当时读的具体进度。</span><br><span class="line">有一个方法就是记下页数、行数与字数这三个数值，这些数值就是execution context。</span><br><span class="line">如果你的室友在你休息的时候，使用相同的方法读这本书。</span><br><span class="line">你和她只需要这三个数字记下来就可以在交替的时间共同阅读这本书了。</span><br><span class="line">线程的工作方式与此类似。CPU会给你一个在同一时间能够做多个运算的幻觉，实际上它在每个运算上只花了极少的时间，</span><br><span class="line">本质上CPU同一时刻只干了一件事。它能这样做就是因为它有每个运算的execution context。</span><br><span class="line">就像你能够和你朋友共享同一本书一样，多任务也能共享同一块CPU。</span><br></pre></td></tr></table></figure>
+<h4 id="进程的定义："><a href="#进程的定义：" class="headerlink" title="进程的定义："></a>进程的定义：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">一个程序的执行实例就是一个进程。每一个进程提供执行程序所需的所有资源。（进程本质上是资源的集合）</span><br><span class="line">一个进程有一个虚拟的地址空间、可执行的代码、操作系统的接口、安全的上下文（记录启动该进程的用户和权限等等）</span><br><span class="line">唯一的进程ID、环境变量、优先级类、最小和最大的工作空间（内存空间），还要有至少一个线程。</span><br><span class="line">每一个进程启动时都会最先产生一个线程，即主线程。然后主线程会再创建其他的子线程。</span><br></pre></td></tr></table></figure>
+<h4 id="文邹邹的讲一下区别（如果你困了，请直接跳至图解进程线程）"><a href="#文邹邹的讲一下区别（如果你困了，请直接跳至图解进程线程）" class="headerlink" title="文邹邹的讲一下区别（如果你困了，请直接跳至图解进程线程）"></a>文邹邹的讲一下区别（如果你困了，请直接跳至图解进程线程）</h4><ul>
+<li>同一个进程中的线程共享同一内存空间，但是进程之间是独立的。</li>
+<li>同一个进程中的所有线程的数据是共享的（进程通讯），进程之间的数据是独立的。</li>
+<li>对主线程的修改可能会影响其他线程的行为，但是父进程的修改（除了删除以外）不会影响其他子进程。</li>
+<li>线程是一个上下文的执行指令，而进程则是与运算相关的一簇资源。</li>
+<li>同一个进程的线程之间可以直接通信，但是进程之间的交流需要借助中间代理来实现。</li>
+<li>创建新的线程很容易，但是创建新的进程需要对父进程做一次复制。</li>
+<li>一个线程可以操作同一进程的其他线程，但是进程只能操作其子进程。</li>
+<li>线程启动速度快，进程启动速度慢（但是两者运行速度没有可比性）。<h4 id="再配上一张图来对比一下"><a href="#再配上一张图来对比一下" class="headerlink" title="再配上一张图来对比一下"></a>再配上一张图来对比一下</h4><img src="/2018/12/03/多线程和多进程的暧昧缠绵/duibi.jpg" alt="线程和进程对比"><h4 id="有趣的图解一波程序执行的线程与进程的概念"><a href="#有趣的图解一波程序执行的线程与进程的概念" class="headerlink" title="有趣的图解一波程序执行的线程与进程的概念"></a>有趣的图解一波程序执行的线程与进程的概念</h4></li>
+</ul>
+<ol>
+<li>计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/1.jpg" alt="1"></li>
+<li>假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，<br>其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/2.jpg" alt="2"></li>
+<li>进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程<br>其他进程处于非运行状态.<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/3.jpg" alt="3"></li>
+<li>一个车间里，可以有很多工人。他们协同完成一个任务。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/4.jpg" alt="4"></li>
+<li>线程就好比车间里的工人。一个进程可以包括多个线程。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/5.jpg" alt="5"></li>
+<li>车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。<br>这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/6.jpg" alt="6"></li>
+<li>可是，每间房间的大小不同，有些房间最多只能容纳一个人，比如厕所。里面有人的时候<br>其他人就不能进去了。这代表一个线程使用某些共享内存时，其他线程必须等它结束，才能使用这一块内存<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/7.jpg" alt="7"></li>
+<li>一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队<br>等锁打开再进去。这就叫”互斥锁”（Mutual exclusion，缩写 Mutex），防止多个线程同时读写某一块内存区域。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/8.jpg" alt="8"></li>
+<li>还有些房间，可以同时容纳n个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。<br>这好比某些内存区域，只能供给固定数目的线程使用。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/9.jpg" alt="9"></li>
+<li>这时的解决方法，就是在门口挂n把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。<br>后到的人发现钥匙架空了，就知道必须在门口排队等着了。这种做法叫做”信号量”（Semaphore）<br>用来保证多个线程不会互相冲突。<br>不难看出，mutex是semaphore的一种特殊情况（n=1时）。也就是说，完全可以用后者替代前者。<br>但是，因为mutex较为简单，且效率高，所以在必须保证资源独占的情况下，还是采用这种设计。<br><img src="/2018/12/03/多线程和多进程的暧昧缠绵/10.jpg" alt="10"></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/03/多线程和多进程的暧昧缠绵/" data-id="cjpe61ztq0008nott43aoiywc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/03/CSAPP又双叒叕来一遍之计算机系统漫游/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSAPP又双叒叕来一遍之计算机系统漫游
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/27/摸鱼儿·雁丘词/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">摸鱼儿·雁丘词</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Kitty萌新的卧室</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>7</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Kit4y" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.hirworld.xyz/" target="_blank" title="曹神">
+          曹神
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Kitty<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/" title="" class="menuItem">KittyHome</a>
+          
+            <a href="https://github.com/Kit4y" title="" class="menuItem">gayhub</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

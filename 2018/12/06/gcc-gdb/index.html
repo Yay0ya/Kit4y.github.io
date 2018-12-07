@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>gcc &amp;&amp; gdb | Kitty萌新的卧室</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、GCC参数详解什么是gccgcc的全称是GNU Compiler Collection，它是一个能够编译多种语言的编译器。最开始gcc是作为C语言的编译器（GNU C Compiler），现在除了c语言，还支持C++、java、Pascal等语言。gcc支持多种硬件平台。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gcc &amp;&amp; gdb">
+<meta property="og:url" content="http://yoursite.com/2018/12/06/gcc-gdb/index.html">
+<meta property="og:site_name" content="Kitty萌新的卧室">
+<meta property="og:description" content="一、GCC参数详解什么是gccgcc的全称是GNU Compiler Collection，它是一个能够编译多种语言的编译器。最开始gcc是作为C语言的编译器（GNU C Compiler），现在除了c语言，还支持C++、java、Pascal等语言。gcc支持多种硬件平台。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/12/06/gcc-gdb/gcc.PNG">
+<meta property="og:updated_time" content="2018-12-05T19:19:46.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gcc &amp;&amp; gdb">
+<meta name="twitter:description" content="一、GCC参数详解什么是gccgcc的全称是GNU Compiler Collection，它是一个能够编译多种语言的编译器。最开始gcc是作为C语言的编译器（GNU C Compiler），现在除了c语言，还支持C++、java、Pascal等语言。gcc支持多种硬件平台。">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/06/gcc-gdb/gcc.PNG">
+  
+    <link rel="alternate" href="/atom.xml" title="Kitty萌新的卧室" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>7</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-gcc-gdb" class="wow slideInRight article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/06/gcc-gdb/" class="article-date">
+  <time class="post-time" datetime="2018-12-05T19:00:14.000Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br>
+    <span class="post-day">06</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      gcc &amp;&amp; gdb
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、GCC参数详解"><a href="#一、GCC参数详解" class="headerlink" title="一、GCC参数详解"></a>一、GCC参数详解</h2><h4 id="什么是gcc"><a href="#什么是gcc" class="headerlink" title="什么是gcc"></a>什么是gcc</h4><p>gcc的全称是GNU Compiler Collection，它是一个能够编译多种语言的编译器。最开始gcc是作为C语言的编译器（GNU C Compiler），现在除了c语言，还支持C++、java、Pascal等语言。gcc支持多种硬件平台。<br><a id="more"></a></p>
+<h4 id="gcc-与-g-分别是-gnu-的-c-amp-c-编译器-gcc-g-在执行编译工作的时候，总共需要4步："><a href="#gcc-与-g-分别是-gnu-的-c-amp-c-编译器-gcc-g-在执行编译工作的时候，总共需要4步：" class="headerlink" title="gcc 与 g++ 分别是 gnu 的 c &amp; c++ 编译器 gcc/g++ 在执行编译工作的时候，总共需要4步："></a>gcc 与 g++ 分别是 gnu 的 c &amp; c++ 编译器 gcc/g++ 在执行编译工作的时候，总共需要4步：</h4><ol>
+<li>预处理,生成 .i 的文件[预处理器cpp]</li>
+<li>将预处理后的文件不转换成汇编语言, 生成文件 .s [编译器egcs]</li>
+<li>有汇编变为目标代码(机器代码)生成 .o 的文件[汇编器as]</li>
+<li>连接目标代码, 生成可执行程序 [链接器ld]<h4 id="来看一下gcc常用选项："><a href="#来看一下gcc常用选项：" class="headerlink" title="来看一下gcc常用选项："></a>来看一下gcc常用选项：</h4><img src="/2018/12/06/gcc-gdb/gcc.PNG" alt="1"><h4 id="现在我们有源文件hello-c，下面是一些gcc的使用示例："><a href="#现在我们有源文件hello-c，下面是一些gcc的使用示例：" class="headerlink" title="现在我们有源文件hello.c，下面是一些gcc的使用示例："></a>现在我们有源文件hello.c，下面是一些gcc的使用示例：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">gcc -E hello.c -o hello.i   对hello.c文件进行预处理，生成了hello.i 文件</span><br><span class="line">gcc -S hello.i -o hello.s    对预处理文件进行编译，生成了汇编文件</span><br><span class="line">gcc -c hello.s -o hello.o  对汇编文件进行编译，生成了目标文件</span><br><span class="line">gcc hello.o -o hello 对目标文件进行链接，生成可执行文件</span><br><span class="line">gcc hello.c -o hello 直接编译链接成可执行目标文件</span><br><span class="line">gcc -c  hello.c 或 gcc -c hello.c -o hello.o 编译生成可重定位目标文件</span><br><span class="line">gcc -Og -S hello.c  生成汇编</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="二、GDB入门教程"><a href="#二、GDB入门教程" class="headerlink" title="二、GDB入门教程"></a>二、GDB入门教程</h2><h4 id="什么是GDB"><a href="#什么是GDB" class="headerlink" title="什么是GDB"></a>什么是GDB</h4><p>GDB（The GNU Debugger），是GNU开源组织发布的一个强大的UNIX程序调试工具。如果你是在 UNIX平台下开发软件，你会发现GDB这个调试工具有比VC、BCB的图形化调试工具拥有更强大的功能。同时GDB也具有例如DDD调试器，全称是Data Display Debugger这样的图形化调试端。</p>
+<p>一般来说，GDB主要完成下面四个方面的功能：<br>(1)启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。<br>(2)可让被调试的程序在你所指定的调置的断点处停住。（断点可以是条件表达式）<br>(3)当程序被停住时，可以检查此时你的程序中所发生的事。<br>(4)动态的改变程序的执行环境。</p>
+<h4 id="GDB通常和gcc命令一起使用，编译选项加入-g才可使可执行文件处于debug模式。"><a href="#GDB通常和gcc命令一起使用，编译选项加入-g才可使可执行文件处于debug模式。" class="headerlink" title="GDB通常和gcc命令一起使用，编译选项加入-g才可使可执行文件处于debug模式。"></a>GDB通常和gcc命令一起使用，编译选项加入-g才可使可执行文件处于debug模式。</h4><h4 id="gdb命令格式："><a href="#gdb命令格式：" class="headerlink" title="gdb命令格式："></a>gdb命令格式：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gdb [-help] [-nx] [-q] [-batch] [-cd=dir] [-f] [-b bps] [-tty=dev]</span><br><span class="line">    [-s symfile] [-e prog] [-se prog] [-c core] [-x cmds] [-d dir]</span><br><span class="line">    [prog[core|procID]]</span><br></pre></td></tr></table></figure>
+<p>常用的操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">gdb [可执行文件]：选中可执行程序,进入gdb的debug模式；</span><br><span class="line">    (gdb) b（breakpoint）:用法：b 函数名 ：对此函数进行中断 ；b 文件名：行号；</span><br><span class="line">    (gdb) run：启动程序，运行至程序的断点或者结束；</span><br><span class="line">    (gdb) l(list):用法：l funcname，制定函数的源码。或者l linenum，显示指定行周围的源码。或l -，显示当前行前面的源码。或l，显示当前行后面的源码；</span><br><span class="line">    (gdb) s(step):进入函数，逐语句运行；</span><br><span class="line">    (gdb) n(next):不进入函数，逐过程运行；</span><br><span class="line">    (gdb) c（continue）：继续运行，跳至下一个断点；</span><br><span class="line">    (gdb) p（print）：打印显示变量值；</span><br><span class="line">    (gdb) set variable=value,为变量赋值；</span><br><span class="line">    (gdb) kill：终止调试的程序；</span><br><span class="line">    (gdb) h（help）：列出gdb详细命令帮助列表；</span><br><span class="line">    (gdb) clear filename.c:30：清除30行处的断点；</span><br><span class="line">    (gdb) info break：显示断点信息；</span><br><span class="line">    (gdb) delete 断点编号：断点编号是info break 后显示出来的；</span><br><span class="line">    (gdb) bt（backtrace）：回溯到段出错的位置；</span><br><span class="line">    (gdb) frame 帧号：帧号是bt命令产生的堆栈针；</span><br><span class="line">    (gdb) q：退出；</span><br></pre></td></tr></table></figure></p>
+<h4 id="gdb分屏操作"><a href="#gdb分屏操作" class="headerlink" title="gdb分屏操作"></a>gdb分屏操作</h4><p>（1）gdb模式下使用layout src 或者大于号 &gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">layout src</span><br></pre></td></tr></table></figure></p>
+<p>（2）还可以在进入gdb时加入参数-tui达到同样效果。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -tui</span><br></pre></td></tr></table></figure>
+<p>(3)退出分屏模式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用快捷键Ctrl+x+a切换。</span><br></pre></td></tr></table></figure></p>
+<h4 id="Text-User-Interface-TUI-感兴趣的可以自己去了解，此处不展开"><a href="#Text-User-Interface-TUI-感兴趣的可以自己去了解，此处不展开" class="headerlink" title="Text User Interface(TUI)感兴趣的可以自己去了解，此处不展开"></a>Text User Interface(TUI)感兴趣的可以自己去了解，此处不展开</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/06/gcc-gdb/" data-id="cjpe61zto0006notty1nj7lk3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/06/基础汇编语言/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基础汇编语言</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Kitty萌新的卧室</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>7</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Kit4y" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.hirworld.xyz/" target="_blank" title="曹神">
+          曹神
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Kitty<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/" title="" class="menuItem">KittyHome</a>
+          
+            <a href="https://github.com/Kit4y" title="" class="menuItem">gayhub</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
