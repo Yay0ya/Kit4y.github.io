@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>CSAPP又双叒叕来一遍之链接 | Kitty萌新的卧室</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="整体看本章（第七章讲了啥）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP又双叒叕来一遍之链接">
+<meta property="og:url" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/index.html">
+<meta property="og:site_name" content="Kitty萌新的卧室">
+<meta property="og:description" content="整体看本章（第七章讲了啥）">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/2.webp">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/3d.webp">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/4.webp">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/1.webp">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/5.webp">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/6.webp">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/7.webp">
+<meta property="og:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/8.webp">
+<meta property="og:updated_time" content="2018-12-20T23:41:29.139Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSAPP又双叒叕来一遍之链接">
+<meta name="twitter:description" content="整体看本章（第七章讲了啥）">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/2.webp">
+  
+    <link rel="alternate" href="/atom.xml" title="Kitty萌新的卧室" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>12</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-CSAPP又双叒叕来一遍之链接" class="wow slideInRight article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/21/CSAPP又双叒叕来一遍之链接/" class="article-date">
+  <time class="post-time" datetime="2018-12-20T23:25:10.000Z" itemprop="datePublished">
+    <span class="post-month">12月</span><br>
+    <span class="post-day">21</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CSAPP又双叒叕来一遍之链接
+    </h1>
+  
+
+        <div>
+          
+          
+              
+
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="整体看本章（第七章讲了啥）"><a href="#整体看本章（第七章讲了啥）" class="headerlink" title="整体看本章（第七章讲了啥）"></a>整体看本章（第七章讲了啥）</h4><p><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/2.webp" alt=""><br><a id="more"></a><br>链接是将各种不同文件的代码和数据部分收集（符号解析和重定位）起来并组合成一个单一文件的过程。</p>
+<h4 id="目标文件三种形式："><a href="#目标文件三种形式：" class="headerlink" title="目标文件三种形式："></a>目标文件三种形式：</h4><p>1、可重定位目标文件：包含二进制代码和数据，其形式可以在编译时与其他可重定位目标文件合并起来，创建一个可执行目标文件。<br>2、可执行目标文件：包含二进制代码和数据，其形式可以直接拷贝到存储器并执行。<br>3、共享目标文件：一种特殊类型的可重定位目标文件，可以在加载或运行时被动态地加载到存储器并链接。</p>
+<h4 id="看一下GCC做了哪些事情"><a href="#看一下GCC做了哪些事情" class="headerlink" title="看一下GCC做了哪些事情"></a>看一下GCC做了哪些事情</h4><p><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/3d.webp" alt=""></p>
+<h4 id="细讲最后一步链接器（ld）做了啥"><a href="#细讲最后一步链接器（ld）做了啥" class="headerlink" title="细讲最后一步链接器（ld）做了啥"></a>细讲最后一步链接器（ld）做了啥</h4><p><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/4.webp" alt=""><br>1、符号解析。目标文件定义和引用符号，符号解析的目的是将每个符号引用和一个符号定义联系起来；<br>2、重定位：把每个符号定义与一个存储器位置联系起来，然后修改对这些符号的引用，是的他们指向这个存储器位置，从而实现重定位。</p>
+<h4 id="链接器操作的目标文件"><a href="#链接器操作的目标文件" class="headerlink" title="链接器操作的目标文件"></a>链接器操作的目标文件</h4><p>目标文件一般是由汇编器生成的.o后缀的文件，大概有三种不同的形式：可重定位目标文件；可执行目标文件和共享目标文件。我们接下来讨论的目标文件是基于Unix系统的ELF格式（Exxcutable and Linkable Format），这同Windows系统上的PE（Portable Executable）文件格式在基本概念上其实是相似的：<br>一个典型的ELF可重定位目标文件的格式：<br><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/1.webp" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.text：已编译程序的机器码；.rodata：只读数据（read-only-data）；</span><br><span class="line">.data：已初始化的全局C变量；.bss：未初始化的全局C变量（better save space）;</span><br><span class="line">.symtab：一个符号表（定义和引用的函数和全局变量信息）；</span><br><span class="line">.rel.text：代码重定位条目， 一个.text节中位置的列表，需要修改的位置;</span><br><span class="line">.rel.data: 被模块引用或定义的任何全局变量的重定位信息；</span><br><span class="line">.debug：一个调试符号表； .line：原始C源程序中的行号和.text机器指令的映射；</span><br><span class="line">.strtab: 一个字符串表</span><br></pre></td></tr></table></figure></p>
+<h4 id="ld任务一-符号解析（符号和符号表）"><a href="#ld任务一-符号解析（符号和符号表）" class="headerlink" title="ld任务一 符号解析（符号和符号表）"></a>ld任务一 符号解析（符号和符号表）</h4><p>保存于.symtab中的是一个符号表，其是定义和引用函数和全局变量的信息。有三种不同类型的符号：全局符号（不带static），外部引用（external）和本地符号。如果是带有static符号的就会在.data和.bss中为每个定义分配空间，并在.symtab中创建一个唯一名字的本地符号。比如：<br>中有两个static定义的x变量，其会在.data中分配空间，并在.symtab中创建两个，x.1表示f函数的定义和x.2表示函数g的定义。（注：使用static可以保护你自己的变量和函数）<br><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/5.webp" alt=""><br>符号解析任务简单的说，就是链接器使得所有模块中的每个符号只有一个定义。链接器在这一个阶段的主要任务就是把代码中的每个符号引用和确定的一个符号定义联系起来。对于本地符号，这个任务相对来说是简单的。复杂的就是全局符号，编译器（cc1）遇到不是在当前模块中定义的符号时，会假设该符号的定义在其他模块中，生成一个链接器符号交给链接器处理。如果链接器ld在所有的模块中都找不到定义的话就会抛出异常。</p>
+<h4 id="如何链接和解析静态库"><a href="#如何链接和解析静态库" class="headerlink" title="如何链接和解析静态库"></a>如何链接和解析静态库</h4><p>像printf等一些常用的函数，都是在libc.a静态库中，静态库以一种存档的特殊文件（.a）格式，将可以定位的目标文件集合成一个.a文件。<br><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/6.webp" alt=""></p>
+<h4 id="ld任务二-重定位"><a href="#ld任务二-重定位" class="headerlink" title="ld任务二 重定位"></a>ld任务二 重定位</h4><p>完成了符号解析以后，链接器的第二个任务就是合并输入模块，并为每个符号分配运行时的地址。<br>重定位节和符号定义：在这一步中，链接器将所有模块中的.data节合并成一个文件的.data节，运行时存储器的地址也会赋给新的聚合节。<br>然后就是，重定位节中的符号引用：链接器修改代码节和数据节中对每个符号的引用，使得他们指向正确的运行时地址。这一步要用到重定位条目这一数据结构，我们来描述这个过程：</p>
+<h4 id="可执行目标文件格式"><a href="#可执行目标文件格式" class="headerlink" title="可执行目标文件格式"></a>可执行目标文件格式</h4><p>通过前面知识的学习，我们了解到链接器主要完成了两个工作，符号解析和重新定义。将数据和代码合并成为一个可执行的文件，接下来我们看看这个可执行文件的格式是什么，以及如何加载到存储器中开始运行的过程。<br><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/7.webp" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ELF头部：描述文件总体格式，标注出程序入口点；.init：定义了初始化函数;</span><br><span class="line">段头部表：可执行文件是一个连续的片，段头部表中描述了这种映射关系；</span><br></pre></td></tr></table></figure></p>
+<h4 id="动态链接共享库"><a href="#动态链接共享库" class="headerlink" title="动态链接共享库"></a>动态链接共享库</h4><p>1、 编译时加载<br><img src="/2018/12/21/CSAPP又双叒叕来一遍之链接/8.webp" alt=""><br>静态库需要定期的维护和更新，调用的代码还会拷贝到每个运行的进程中去，这是对存储器系统资源的极大浪费。为了弥补这样的缺陷，我们发明了共享库。共享库的一个主要目的就是允许多个正在运行的进程共享存储器中相同的库代码，节约资源。以(.so)结尾的文件，在运行时被加载到任意存储器地址，并和存储器中的程序链接起来，以后的进程要用到这个库就从这个固定的位置开始访问。这一过程的管理交由动态链接器程序来执行。<br>2、运行时加载共享库<br>微软的windows程序开发人员提供共享库来更新软件，通常要求下载最新的dll库，然后在程序下一次执行的时候会自动链接和加载更新后的共享库。我们创建dll.c文件，运行时加载libvector.so</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/21/CSAPP又双叒叕来一遍之链接/" data-id="cjpx92m9v0007cottm1zvqi3y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/21/CSAPP又双叒叕来一遍之函数调用过程栈帧的变化/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSAPP又双叒叕来一遍之函数调用过程栈帧的变化</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">Kitty萌新的卧室</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="https://mdlzz.top/jiangshi.jpg">
+    <h2 class="author">Kitty</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>12</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/Kit4y" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="https://www.hirworld.xyz/" target="_blank" title="曹神">
+          曹神
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 Kitty<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/" title="" class="menuItem">KittyHome</a>
+          
+            <a href="https://github.com/Kit4y" title="" class="menuItem">gayhub</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
