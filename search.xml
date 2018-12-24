@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[CSAPP又双叒叕来一遍之链接]]></title>
+    <url>%2F2018%2F12%2F21%2FCSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E9%93%BE%E6%8E%A5%2F</url>
+    <content type="text"><![CDATA[整体看本章（第七章讲了啥）链接是将各种不同文件的代码和数据部分收集（符号解析和重定位）起来并组合成一个单一文件的过程。 目标文件三种形式：1、可重定位目标文件：包含二进制代码和数据，其形式可以在编译时与其他可重定位目标文件合并起来，创建一个可执行目标文件。2、可执行目标文件：包含二进制代码和数据，其形式可以直接拷贝到存储器并执行。3、共享目标文件：一种特殊类型的可重定位目标文件，可以在加载或运行时被动态地加载到存储器并链接。 看一下GCC做了哪些事情 细讲最后一步链接器（ld）做了啥1、符号解析。目标文件定义和引用符号，符号解析的目的是将每个符号引用和一个符号定义联系起来；2、重定位：把每个符号定义与一个存储器位置联系起来，然后修改对这些符号的引用，是的他们指向这个存储器位置，从而实现重定位。 链接器操作的目标文件目标文件一般是由汇编器生成的.o后缀的文件，大概有三种不同的形式：可重定位目标文件；可执行目标文件和共享目标文件。我们接下来讨论的目标文件是基于Unix系统的ELF格式（Exxcutable and Linkable Format），这同Windows系统上的PE（Portable Executable）文件格式在基本概念上其实是相似的：一个典型的ELF可重定位目标文件的格式：1234567.text：已编译程序的机器码；.rodata：只读数据（read-only-data）；.data：已初始化的全局C变量；.bss：未初始化的全局C变量（better save space）;.symtab：一个符号表（定义和引用的函数和全局变量信息）；.rel.text：代码重定位条目， 一个.text节中位置的列表，需要修改的位置;.rel.data: 被模块引用或定义的任何全局变量的重定位信息；.debug：一个调试符号表； .line：原始C源程序中的行号和.text机器指令的映射；.strtab: 一个字符串表 ld任务一 符号解析（符号和符号表）保存于.symtab中的是一个符号表，其是定义和引用函数和全局变量的信息。有三种不同类型的符号：全局符号（不带static），外部引用（external）和本地符号。如果是带有static符号的就会在.data和.bss中为每个定义分配空间，并在.symtab中创建一个唯一名字的本地符号。比如：中有两个static定义的x变量，其会在.data中分配空间，并在.symtab中创建两个，x.1表示f函数的定义和x.2表示函数g的定义。（注：使用static可以保护你自己的变量和函数）符号解析任务简单的说，就是链接器使得所有模块中的每个符号只有一个定义。链接器在这一个阶段的主要任务就是把代码中的每个符号引用和确定的一个符号定义联系起来。对于本地符号，这个任务相对来说是简单的。复杂的就是全局符号，编译器（cc1）遇到不是在当前模块中定义的符号时，会假设该符号的定义在其他模块中，生成一个链接器符号交给链接器处理。如果链接器ld在所有的模块中都找不到定义的话就会抛出异常。 如何链接和解析静态库像printf等一些常用的函数，都是在libc.a静态库中，静态库以一种存档的特殊文件（.a）格式，将可以定位的目标文件集合成一个.a文件。 ld任务二 重定位完成了符号解析以后，链接器的第二个任务就是合并输入模块，并为每个符号分配运行时的地址。重定位节和符号定义：在这一步中，链接器将所有模块中的.data节合并成一个文件的.data节，运行时存储器的地址也会赋给新的聚合节。然后就是，重定位节中的符号引用：链接器修改代码节和数据节中对每个符号的引用，使得他们指向正确的运行时地址。这一步要用到重定位条目这一数据结构，我们来描述这个过程： 可执行目标文件格式通过前面知识的学习，我们了解到链接器主要完成了两个工作，符号解析和重新定义。将数据和代码合并成为一个可执行的文件，接下来我们看看这个可执行文件的格式是什么，以及如何加载到存储器中开始运行的过程。12ELF头部：描述文件总体格式，标注出程序入口点；.init：定义了初始化函数;段头部表：可执行文件是一个连续的片，段头部表中描述了这种映射关系； 动态链接共享库1、 编译时加载静态库需要定期的维护和更新，调用的代码还会拷贝到每个运行的进程中去，这是对存储器系统资源的极大浪费。为了弥补这样的缺陷，我们发明了共享库。共享库的一个主要目的就是允许多个正在运行的进程共享存储器中相同的库代码，节约资源。以(.so)结尾的文件，在运行时被加载到任意存储器地址，并和存储器中的程序链接起来，以后的进程要用到这个库就从这个固定的位置开始访问。这一过程的管理交由动态链接器程序来执行。2、运行时加载共享库微软的windows程序开发人员提供共享库来更新软件，通常要求下载最新的dll库，然后在程序下一次执行的时候会自动链接和加载更新后的共享库。我们创建dll.c文件，运行时加载libvector.so]]></content>
+      <categories>
+        <category>CSAPP</category>
+      </categories>
+      <tags>
+        <tag>链接</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CSAPP又双叒叕来一遍之函数调用过程栈帧的变化]]></title>
+    <url>%2F2018%2F12%2F21%2FCSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B%E6%A0%88%E5%B8%A7%E7%9A%84%E5%8F%98%E5%8C%96%2F</url>
+    <content type="text"><![CDATA[函数调用在第三章第七章均有涉及，故专门总结一波函数调用栈帧的变化1、熟悉一下程序的进程空间 ，即对进程如何使用内存先讨论32位的计算机，计算机物理内存的大小是固定的，就是计算机主板内存槽上的实际物理内存，cpu可以直接进行寻址，物理内存的容量是固定的，但是寻址的空间取决于cpu地址线的数量。在32位系统上，线性地址空间可达4G（2^32）；这4G一般是按照3：1的比例进行分配，用户进程享有3G的空间，而内核独自享有剩下的1G内存 2、谈谈栈帧的概念栈帧(stack frame)，机器用栈来传递过程参数，存储返回信息，保存寄存器用于以后恢复，以及本地存储。为单个过程(函数调用)分配的那部分栈称为栈帧。栈帧其实 是两个指针寄存器，寄存器%ebp为帧指针（指向该栈帧的最底部），而寄存器%esp为栈指针（指向该栈帧的最顶部），当程序运行时，栈指针可以移动(大多数的信息的访问都是通过帧指针的，换句话说，就是如果该栈存在，%ebp帧指针是不移动的，访问栈里面的元素可以用-4(%ebp）或者8(%ebp)访问%ebp指针下面或者上面的元素)。总之简单 一句话，栈帧的主要作用是用来控制和保存一个过程的所有信息的。栈帧结构如下所示：大概解释：假设过程P（调用者）调用过程Q（被调用者），则Q的参数放在P的栈帧中。另外，当P调用Q时，P中的返回地址被压入栈中，形成P的栈帧的末尾 （返回地址就是当程序从Q返回时应该继续执行的地方）。Q的栈帧从保存的帧指针的值开始，后面到新的栈指针之间就是该过程的部分了。 3、函数具体调用示例源代码（忽略主函数）:123456789101112131415int swap_add(int* xp,int* yp) &#123; int x = *xp; int y = *yp; *xp = y; *yp = x; return x+y;&#125;int caller()&#123; int arg1 = 534; int arg2 = 1057; int sum = swap_add(&amp;arg1,&amp;arg2); int diff = arg1 - arg2; return sum * diff;&#125; 经过汇编之后caller部分的代码为：1234567891011121314151617caller: pushl %ebp //保存%ebp movl %esp,%ebp //设置新的帧指针为旧的栈指针 subl $24,%esp //分配24子节的栈空间 movl $534,-4(%ebp) //设置arg1=534 movl $1057,-8(%ebp) //设置arg2=1057 leal -8(%ebp),%eax //计算&amp;arg2 movl %eax,4(%esp) //将&amp;arg2存入栈中 leal -4(%ebp),%eax //计算&amp;arg1 movl %eax,(%esp) //将&amp;arg1存入栈中 call swap_add //调用swap_add-------------------》过程调用 movl -4(%ebp),%edx /从栈中取出arg1,和arg2的值 subl -8(%ebp),%edx //为了计算diff, imull %edx,%eax leave //为返回准备栈，GCC 产生的代码有时候会使用leave指令来释放栈帧， //而有时会使用一个或者两个popl指令。两个方法都可行。 ret //从过程调用中返回 这段代码先保存了%ebp的一个副本，将新的过程（该函数的ebp）的ebp设置为栈帧的开始位置。然后将栈指针减去24，从而在栈上分配了24字 节的空间（你应该思考一下为什么是24字节,记得有两个为保存的寄存器），然后是初始化两个局部变量，计算两个局部变量的地址并存入栈中，形成了函数swap_add的参数。将这些 参数存储到相对于栈指针偏移量为0和+4的地方，留待稍后的swap_add调用访问。然后调用swap_add12345678910111213141516swap_add: pushl %ebp //save old %ebp movl %esp,%ebp //set %ebp as frame pointer pushl %ebx //save %ebx movl 8(%ebp),%edx //Get xp movl 12(%ebp),%ecx //Get yp movl (%edx),%ebx //Get x movl (%ecx),%eax //Get u movl %eax,(%edx) //Store y as xp movl %ebx,(%ecx) //Sotre x as yp addl %ebx,%eax //return value = x + y popl %ebx //restore %ebx popl %ebp //restore %ebp ret //从过程调用中返回, 将控制转移回caller 说明三点，1、说明一点程序在执行到swap_add的代码之前，也就是在执行call语句已经把返回地址压入栈中，包括%esp-4. 2、最后一部 分的popl %ebx popl %ebp。它的作用是恢复了之前存储的栈帧指针的值. 3、返回值是存入了%eax中，在接下来的调用程序caller中直接访问该寄存器 整个过程的栈变化如下所示]]></content>
+      <categories>
+        <category>CSAPP</category>
+      </categories>
+      <tags>
+        <tag>栈帧</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[win10环境下使用virtualenv搭建py虚拟环境]]></title>
+    <url>%2F2018%2F12%2F20%2Fwin10-%E7%8E%AF%E5%A2%83%E4%B8%8B%E4%BD%BF%E7%94%A8virtualenv%E6%90%AD%E5%BB%BApy%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[virtualenv干啥的python2与python3版本不兼容确实很蛋疼，虽然随着时间发展python3一定会将python2取代但是确实现在还有很多项目依赖于python2，virtualenv通过创建一个虚拟化的python运行环境，将我们所需的依赖安装进去的，不同项目之间相互不干扰。 安装 virtualenv1pip install virtualenv 配置操作如果是想搭建一个与目前本机python版本相同的环境，就只需要在某文件目录下直接输入命令(venvdmo可随意)1virtualenv venvdemo 如果本机为py3，想搭建一个py2的虚拟环境输入以下命令(venvdmo可随意)1virtualenv -p &#123;你的py2的路径&#125;/python.exe venvdemo 这时候便会在当前的项目中创建venv文件夹，为当前项目的虚拟python运行环境 激活和冻结在windows中 virtualenv新建一个文件在venvdemo/Scripts中有activate.bat与deactivate.bat用以激活12345678# 定位到新建虚拟环境env 的Script 目录下activate.bat#虚拟环境处于激活状态，显示如下#(env)C:\Users\env\Scripts&gt;# 冻结env 环境#deactivate.bat# 输入deactivate.bat命令后，冻结状态显示如下#C:\Users\env\Scripts&gt; virtualenvwrapper-win 安装 和使用virtualenvwrapper-win 是Windows下对于虚拟环境的管理工具，相当于你有很多小工具，现在买一个工具包来整理一下这些小工具 安装1pip install virtualenvwrapper-win 配置首先，设置virtualenvwrapper-win 的默认环境目录 ： 在win10中，添加系统环境变量 WORKON_HOME,指向 path/dir (自己想要的虚拟环境目录位置如图，之后将在这个固定文件下搭建环境) 进入和退出虚拟环境查看当前有哪些环境1lsvirtualenv或者workon 进入某个环境1workon &#123;环境的名字&#125; 退出某个环境1deactivate &#123;环境的名字&#125; 顺便唠两下关于查看与迁移pip安装的包查看pip 安装过的包1pip list 生成requirements.txt文件1pip freeze &gt;requirements.txt 将在命令行当前目录下生成一个requirements.txt文件为当前pip安装包的各名称 新环境的安装切换到requirements.txt所在的文件夹下 1pip install -r requirements.txt]]></content>
+      <categories>
+        <category>计算机♂操作</category>
+      </categories>
+      <tags>
+        <tag>virtualenv</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[各种源使用国内镜像简单配置]]></title>
+    <url>%2F2018%2F12%2F20%2F%E5%90%84%E7%A7%8D%E6%BA%90%E4%BD%BF%E7%94%A8%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE%2F</url>
+    <content type="text"><![CDATA[windows环境下 pip换国内镜像1、打开user目录，user目录可以通过win+R 然后添加 %APPDATA% (不区分大小写)2、直接在中创建一个pip目录，如：C:\Users\xx\pip，新建文件pip.ini：3、拿任意文本编辑器打开，添加以下内容1234[global]timeout = 6000index-url = http://pypi.douban.com/simpletrusted-host = pypi.douban.com 保存即可 Ubuntu环境下 pip换国内镜像1、在主目录下创建.pip文件夹,然后在该目录下创建pip.conf文件12mkdir ~/.pipvim ~/.pip/pip.conf 2、pip.conf文件编写如下内容（更换为清华大学镜像源）：12[global]index-url = https://pypi.tuna.tsinghua.edu.cn/simple Ubuntu更换系统源1、复制原文件备份1sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak 2、编辑源列表文件(对vim不熟可使用gedit)1sudo vim /etc/apt/sources.list 3、将原来的列表删除，添加如下内容12345678910deb http://mirrors.aliyun.com/ubuntu/ vivid main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ vivid-security main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ vivid-updates main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ vivid-proposed main restricted universe multiversedeb http://mirrors.aliyun.com/ubuntu/ vivid-backports main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ vivid main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ vivid-security main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ vivid-updates main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ vivid-proposed main restricted universe multiversedeb-src http://mirrors.aliyun.com/ubuntu/ vivid-backports main restricted universe multiverse 4、更新本地索引列表运行12sudo apt-get update #更新本地索引列表#sudo apt-get upgrade # 可选/根据更新的索引升级已安装的所有软件包]]></content>
+      <categories>
+        <category>计算机♂操作</category>
+      </categories>
+      <tags>
+        <tag>换源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[利用python进行两位十六进制换字符串]]></title>
+    <url>%2F2018%2F12%2F14%2F%E5%88%A9%E7%94%A8python%E8%BF%9B%E8%A1%8C%E4%B8%A4%E4%BD%8D%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%8D%A2%E5%AD%97%E7%AC%A6%E4%B8%B2%2F</url>
+    <content type="text"><![CDATA[如果你只是简单的解码或编码一个十六进制的原始字符串，可以使用 binascii 模块。例如：1234567&gt;&gt;&gt; s = b&apos;hello&apos;&gt;&gt;&gt; import binascii&gt;&gt;&gt; h = binascii.b2a_hex(s)&gt;&gt;&gt; hb&apos;68656c6c6f&apos;&gt;&gt;&gt; binascii.a2b_hex(h)b&apos;hello&apos; 类似的功能同样可以在 base64 模块中找到。例如：12345678&gt;&gt;&gt; s = b&apos;hello&apos;&gt;&gt;&gt; import base64&gt;&gt;&gt; h = base64.b16encode(s)&gt;&gt;&gt; hb&apos;68656C6C6F&apos;&gt;&gt;&gt; base64.b16decode(h)b&apos;hello&apos;&gt;&gt;&gt; 讨论:大部分情况下，通过使用上述的函数来转换十六进制是很简单的。 上面两种技术的主要不同在于大小写的处理。 函数 base64.b16decode() 和 base64.b16encode() 只能操作大写形式的十六进制字母， 而 binascii 模块中的函数大小写都能处理。 还有一点需要注意的是编码函数所产生的输出总是一个字节字符串。 如果想强制以Unicode形式输出，你需要增加一个额外的界面步骤。例如：123456&gt;&gt;&gt; h = base64.b16encode(s)&gt;&gt;&gt; print(h)b&apos;68656C6C6F&apos;&gt;&gt;&gt; print(h.decode(&apos;ascii&apos;))68656C6C6F&gt;&gt;&gt;]]></content>
+      <categories>
+        <category>计算机♂操作</category>
+      </categories>
+      <tags>
+        <tag>进制转换</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[gcc && gdb]]></title>
+    <url>%2F2018%2F12%2F06%2Fgcc-gdb%2F</url>
+    <content type="text"><![CDATA[一、GCC参数详解什么是gccgcc的全称是GNU Compiler Collection，它是一个能够编译多种语言的编译器。最开始gcc是作为C语言的编译器（GNU C Compiler），现在除了c语言，还支持C++、java、Pascal等语言。gcc支持多种硬件平台。 gcc 与 g++ 分别是 gnu 的 c &amp; c++ 编译器 gcc/g++ 在执行编译工作的时候，总共需要4步： 预处理,生成 .i 的文件[预处理器cpp] 将预处理后的文件不转换成汇编语言, 生成文件 .s [编译器egcs] 有汇编变为目标代码(机器代码)生成 .o 的文件[汇编器as] 连接目标代码, 生成可执行程序 [链接器ld]来看一下gcc常用选项：现在我们有源文件hello.c，下面是一些gcc的使用示例：1234567gcc -E hello.c -o hello.i 对hello.c文件进行预处理，生成了hello.i 文件gcc -S hello.i -o hello.s 对预处理文件进行编译，生成了汇编文件gcc -c hello.s -o hello.o 对汇编文件进行编译，生成了目标文件gcc hello.o -o hello 对目标文件进行链接，生成可执行文件gcc hello.c -o hello 直接编译链接成可执行目标文件gcc -c hello.c 或 gcc -c hello.c -o hello.o 编译生成可重定位目标文件gcc -Og -S hello.c 生成汇编 二、GDB入门教程什么是GDBGDB（The GNU Debugger），是GNU开源组织发布的一个强大的UNIX程序调试工具。如果你是在 UNIX平台下开发软件，你会发现GDB这个调试工具有比VC、BCB的图形化调试工具拥有更强大的功能。同时GDB也具有例如DDD调试器，全称是Data Display Debugger这样的图形化调试端。 一般来说，GDB主要完成下面四个方面的功能：(1)启动你的程序，可以按照你的自定义的要求随心所欲的运行程序。(2)可让被调试的程序在你所指定的调置的断点处停住。（断点可以是条件表达式）(3)当程序被停住时，可以检查此时你的程序中所发生的事。(4)动态的改变程序的执行环境。 GDB通常和gcc命令一起使用，编译选项加入-g才可使可执行文件处于debug模式。gdb命令格式：123gdb [-help] [-nx] [-q] [-batch] [-cd=dir] [-f] [-b bps] [-tty=dev] [-s symfile] [-e prog] [-se prog] [-c core] [-x cmds] [-d dir] [prog[core|procID]] 常用的操作：1234567891011121314151617gdb [可执行文件]：选中可执行程序,进入gdb的debug模式； (gdb) b（breakpoint）:用法：b 函数名 ：对此函数进行中断 ；b 文件名：行号； (gdb) run：启动程序，运行至程序的断点或者结束； (gdb) l(list):用法：l funcname，制定函数的源码。或者l linenum，显示指定行周围的源码。或l -，显示当前行前面的源码。或l，显示当前行后面的源码； (gdb) s(step):进入函数，逐语句运行； (gdb) n(next):不进入函数，逐过程运行； (gdb) c（continue）：继续运行，跳至下一个断点； (gdb) p（print）：打印显示变量值； (gdb) set variable=value,为变量赋值； (gdb) kill：终止调试的程序； (gdb) h（help）：列出gdb详细命令帮助列表； (gdb) clear filename.c:30：清除30行处的断点； (gdb) info break：显示断点信息； (gdb) delete 断点编号：断点编号是info break 后显示出来的； (gdb) bt（backtrace）：回溯到段出错的位置； (gdb) frame 帧号：帧号是bt命令产生的堆栈针； (gdb) q：退出； gdb分屏操作（1）gdb模式下使用layout src 或者大于号 &gt;1layout src （2）还可以在进入gdb时加入参数-tui达到同样效果。 1gdb -tui (3)退出分屏模式1使用快捷键Ctrl+x+a切换。 Text User Interface(TUI)感兴趣的可以自己去了解，此处不展开]]></content>
+      <categories>
+        <category>计算机♂操作</category>
+      </categories>
+      <tags>
+        <tag>GCC&amp;&amp;GDB</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[基础汇编语言]]></title>
+    <url>%2F2018%2F12%2F06%2F%E5%9F%BA%E7%A1%80%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%2F</url>
+    <content type="text"><![CDATA[CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文一、数据格式 二、x86-64的CPU包含一组16个存储64位值的通用目的寄存器，用来存储整数数据和指针。 三、访问信息，x86-64的CPU支持多种操作数格式，各种不同操作数可能性被分为三种类型，分为立即数，用来表示常数；寄存器，用来表示某个寄存器的内容；内存引用，根据计算出来的地址访问某个内存位置。 四、MOV类(ps:最后两个数据传送操作可以将数据压入程序栈中，以及从程序栈中弹出数据。) 五、整数和逻辑操作（ps:加载有效地址指令leaq实际上是movq指令的变形。它的指令形式是从内存读数据到寄存器，但实际上并没有引用内存。） 六、mov和lea指令的区别 LEA表示负载有效地址 MOV平均负荷值 简而言之，LEA加载指向你要寻址的项的指针，而MOV则在该地址加载实际值。例如:123mov ecx,[eax+0x30]表示先运算eax+0x30得到一个结果,以这个结果为地址找一个ecx长度的内存数赋给ecxlea ecx,[eax+0x30]表示先运算eax+0x30得到一个结果,把这个结果(mov时地址)赋给ecx效果为ecx=eax+0x30 (这里eax参与了运算却没有改变值) 七、条件控制跳转指令分三类： 无条件跳转: JMP; 根据 CX、ECX 寄存器的值跳转: JCXZ(CX 为 0 则跳转)、JECXZ(ECX 为 0 则跳转); 根据 EFLAGS 寄存器的标志位跳转, 以下罗列. 根据标志位跳转的指令：123456789101112131415161718192021222324252627282930313233343536373839JE ;等于则跳转JNE ;不等于则跳转JZ ;为 0 则跳转JNZ ;不为 0 则跳转JS ;为负则跳转JNS ;不为负则跳转JC ;进位则跳转JNC ;不进位则跳转JO ;溢出则跳转JNO ;不溢出则跳转JA ;无符号大于则跳转JNA ;无符号不大于则跳转JAE ;无符号大于等于则跳转JNAE ;无符号不大于等于则跳转JG ;有符号大于则跳转JNG ;有符号不大于则跳转JGE ;有符号大于等于则跳转JNGE ;有符号不大于等于则跳转JB ;无符号小于则跳转JNB ;无符号不小于则跳转JBE ;无符号小于等于则跳转JNBE ;无符号不小于等于则跳转JL ;有符号小于则跳转JNL ;有符号不小于则跳转JLE ;有符号小于等于则跳转JNLE ;有符号不小于等于则跳转JP ;奇偶位置位则跳转JNP ;奇偶位清除则跳转JPE ;奇偶位相等则跳转JPO ;奇偶位不等则跳转 跳转相关的标志位: 11 10 9 8 7 6 5 4 3 2 1 0 OF DF IF TF SF ZF AF PF CF 溢出 DF IF TF 符号 零 辅助 奇偶 进位 八、特殊算术]]></content>
+      <categories>
+        <category>计算机通识课笔记</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CSAPP又双叒叕来一遍之程序的机器级表示]]></title>
+    <url>%2F2018%2F12%2F06%2FCSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9C%BA%E5%99%A8%E7%BA%A7%E8%A1%A8%E7%A4%BA%2F</url>
+    <content type="text"><![CDATA[一、本章主要内容 二、程序编码计算机系统使用了多种不同形式的抽象，利用更简单的抽象模型来隐藏实现的细节。对于机器级编程来说，其中两种抽象尤为重要： 指令集体系结构或指令级框架：它定义了处理器状态、指令的格式，以及每条指令对状态的影响。IA32将程序的行为描述成好像每条指令时按顺序执行的，一条指令结束后，下一条再开始。（实际上处理器并发地执行许多指令，但是可以采取措施保证整体行为与ISA指定的顺序执行完全一致） 机器级程序使用的存储器地址是虚拟地址：提供的存储器模型看上去是一个非常大的字节数组。存储器系统的实际实现是将多个硬件存储器和操作系统软件组合起来。 程序存储器(program memory)包含： 程序的可执行机器代码、操作系统需要的一些信息、栈、堆。程序存储器用虚拟地址来寻址（此虚拟地址不是机器级虚拟地址）。操作系统负责管理虚拟地址空间（程序级虚拟地址），将虚拟地址翻译成实际处理器存储器中的物理地址（机器级虚拟地址）。 三、拿一个C自己玩玩 用c语言写一个代码文件hello.c 在命令行上使用“-S”选项，就能看到C语言编译器产生的汇编代码 1Linux&gt; gcc -Og -S hello.c 编译为可执行文件 1Linux&gt; gcc -o hello hello.c 看机器代码文件的内容，有一类称为反汇编器，带“-d”命令行 1linux&gt; objdump -d hello (ps：汇编指令单独写博客，本地不展开) 四、 过程 过程是软件中一种很重要的抽象。它提供了一种封装代码的方式，用一组指定的参数和一个可选的返回值实现某种功能。然后，可以在程序中不同的地方调用这个函数。过程机制的构建需要实现传递控制、传递数据、分配和释放内存。 当x86-64过程需要的存储空间超出寄存器能够存放的大小时，就会在栈上分配空间。这个部分称为过程的栈帧。 （栈在过程中的变化单独细讲，本处不展开） 五、异质的数据结构Struct 和 Union有下列区别： 在存储多个成员信息时，编译器会自动给struct第1个成员分配存储空间，struct 可以存储多个成员信息，而Union每个成员会用同一个存储空间，只能存储最后一个成员的信息。 都是由多个不同的数据类型成员组成，但在任何同一时刻，Union只存放了一个被先选中的成员，而结构体的所有成员都存在。 对于Union的不同成员赋值，将会对其他成员重写，原来成员的值就不存在了，而对于struct 的不同成员赋值 是互不影响的。六、对抗缓冲区溢出攻击1、栈随机化（ASLR和PIE）为了在系统中插入攻击代码，攻击者不但要插入代码，还要插入指向这段代码的指针，这个指针也是攻击字符串的一部分。产生这个指针需要知道这个字符串放置的栈地址。在过去，程序的栈地址非常容易预测，在不同的机器之间，栈的位置是相当固定的。栈随机化的思想使得栈的位置在程序每次运行时都有变化。因此，即使许多机器都运行相同的代码。它们的栈地址都是不同的。实现的方式是：程序开始时，在栈上分配一段0–n字节之间的随机大小空间。程序不使用这段空间，但是它会导致程序每次执行时后续的栈位置发生了变化。在Linux系统中，栈随机化已经变成了标准行为。（在linux上每次运行相同的程序，其同一局部变量的地址都不相同）2、栈破坏检测在C语言中，没有可靠的方法来防止对数组的越界写，但是，我们能够在发生了越界写的时候，在没有造成任何有害结果之前，尝试检测到它。最近的GCC版本在产生的代码中加入了一种栈保护者机制，用来检测缓冲区越界，其思想是在栈中任何局部缓冲区与栈状态之间存储一个特殊的金丝雀值。这个金丝雀值是在程序每次运行时随机产生的，因此，攻击者没有简单的办法知道它是什么。在恢复寄存器状态和从函数返回之前，程序检查这个金丝雀值是否被该函数的某个操作或者函数调用的某个操作改变了。如果是，那么程序异常终止。3、限制可执行代码区域限制那些能够存放可执行代码的存储器区域。在典型的程序中，只有保存编译器产生的代码的那部分存储器才需要是可执行的，其他部分可以被限制为只允许读和写。现在的64位处理器的内存保护引入了”NX”(不执行)位。有了这个特性，栈可以被标记为可读和可写，但是不可执行，检查页是否可执行由硬件来完成，效率上没有损失。]]></content>
+      <categories>
+        <category>CSAPP</category>
+      </categories>
+      <tags>
+        <tag>汇编</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CSAPP又双叒叕来一遍之计算机系统漫游]]></title>
+    <url>%2F2018%2F12%2F03%2FCSAPP%E5%8F%88%E5%8F%8C%E5%8F%92%E5%8F%95%E6%9D%A5%E4%B8%80%E9%81%8D%E4%B9%8B%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%BC%AB%E6%B8%B8%2F</url>
+    <content type="text"><![CDATA[说在前面的一些废话，如果你困了，请直接跳至正文刚入学就买的这本《深入理解计算机系统》。一年多来，学学停停，但是永远记住了第一章第二段的第二句话12如果你全力投身学习本书的概念，完全理解底层计算机系统以及它对应用程序的影响那么你会走向为数不多的“大牛”的道路 好一个大牛的道路，对于热爱计算机的人来说的“大牛的道路” 和 爱好钱财的人的“富婆包养路”（或者是富萝莉）地位相同在这句话的驱动下（多少人和我一样啊），这本书是我花费最多时间和精力去啃的专业书籍这本书确实无敌到能让一个完全不懂的孩童般见识到了计算机专业广阔无垠、波澜壮阔的海洋。惭愧的是完全没有达到大牛们啃完后通彻计算机系统的境界即便是如此我还是受益匪浅，CSAPP无愧为计算机专业的神书！如今我已经大二，按理说是踌躇满志的时候，我却满是遗憾，遗憾自己大一后半学期的固步自封，浪费了那么多宝贵的青春年华在毫无意义的事物上，追求短暂的愉悦却荒芜了年华。 但是往昔不可忆，切记不要再浪费自己的青春和元气。所以重整旗鼓，这回想认真总结一下（感言结束，疯狂暗示+安利）一、分析hello.c的例子，从其生命周期分析系统的执行过程hello.c 源代码：123456#include&lt;stdio.h&gt;int main()&#123; printf(&quot;hello world&quot;); return 0;&#125; 在Unix系统上,从源文件到目标文件的转化是由编译器驱动程序完成的:1unix&gt;gcc -o hello hello.c 执行这四个阶段的程序(预处理器、编译器、汇编器、链接器)一起构成了编译系统(compilation system). 预处理阶段:也就是对程序进行预处理。C程序中特指“”#“”包含的库文件。预处理器将库文件直接导入到源代码中，此例就是将头文件“stdio.h”导入到源程序中，生成hello.i源代码。 编译阶段:编译器(ccl)将文本文件hello.i翻译成文本文件hello.s,它包含一个汇编语言程序. 汇编阶段: 将汇编语言转化为机器指令,生成二进制文件——hello.o。 链接阶段.目标文件合并到我们的hello.o程序中,链接器就处理这种合并.得到hello文件,一个可执行目标文件,可以被加载到内存中,由系统执行. 二、信息就是位+上下文源程序实际上就是由一个值0和1组成的位(bit)序列,8个位被组织成一组,称为字节.每个字节表示程序中某个文本字符.大部分现代系统都是有ASCII标准表示文本字符,只由ASCII字符构成的文件称为文本文件,所有其他文件都称为二进制文件系统中所有的信息—–包括磁盘文件、存储器中的程序、存储器中存放的用户数据以及网络上传送的数据,都是由一串位表示的.区分不同数据对象的唯一方法是我们读到这些数据对象时的上下文.比如:在不同的上下文中,一个同样的字节序列可能表示一个整数、浮点数、字符串或者机器指令. 三、系统的硬件组成CPU:中央处理单元 &ensp; ALU:算术/逻辑单元 &ensp;PC:程序计数器 &ensp;USB:通用串行总线 总线贯穿整个系统的是一组电子管道,称做总线,它携带信息字节并负责在各个部件间传递. I/O设备:输入/输出(I/O)设备是系统与外部世界的联系通道 主存:主存是一个临时存储设备,在处理器执行程序时,用来存放程序和程序处理的数据. 处理器:中央处理单元(CPU),简称处理器,是解释(或执行)存储在主存中指令的引擎.处理器的核心是一个字长的存储设备(或寄存器),称为程序计数器(PC). 四、存储设备形成层次结构存储器层次结构的主要思想是一层上的存储器作为低一层存储器的高速缓存. 五、线程进程，单独分离写了个博客，这里不重复六、计算机系统中抽象的重要性 文件是对I/O的抽象 虚拟存储器是对程序存储器的抽象. 进程是对一个正在运行的程序的抽象. 虚拟机,它提供对整个计算机(操作系统,处理器和程序)的抽象. 七、虚拟内存虚拟内存是一个抽象概念，它为每个进程提供了一个假象，即每个进程都在独占地使用主存。每个进程看到的内存都是一致的，称为虚拟地址空间。在linux中，进程的虚拟地址空间如下图 程序代码和数据：对于所有进程来说，代码从一固定地址开始，紧接和C全局变量相对应的数据位置。第七章研究链接和加载时，学到更多有关地址空间的内容。 堆 ：代码和数据区紧随着运行时堆。代码和数据区是在进程一开始就被规定了大小，与此不同，调用malloc和free时堆动态的扩展和收缩。第9章学习管理虚拟存储器时，详细研究。 共享库：地址空间的中间部分存放C标准库和数学库这样共享库代码和数据的区域。共享库概念非常强大，相当难懂。第七章详解。 栈: 用户虚拟地址顶部的是用户栈，编译器用它来实现函数调用。和堆一样，在执行时动态的扩展和收缩。第三章详解。 内核虚拟内存。 内核总是驻留在内存中，是操作系统一部分。 总结：由于本章只是计算机漫游，故只阐释了计算机的大概，具体细节后面章节，慢慢展开]]></content>
+      <categories>
+        <category>CSAPP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[多线程和多进程的暧昧缠绵]]></title>
+    <url>%2F2018%2F12%2F03%2F%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%9A%A7%E6%98%A7%E7%BC%A0%E7%BB%B5%2F</url>
+    <content type="text"><![CDATA[先教科书一波（“千万别被吓到”），教科书上关于多进程和多线程解释为1进程是资源分配的最小单位，线程是CPU调度的最小单位 据说这句话拿去考试,改卷老师一定会给高分，但是还是嘚深入了解一下 线程的定义：1234线程是操作系统能够进行运算调度的最小单位。它被包含在进程之中，是进程中的实际运作单位。一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，每条线程并行执行不同的任务。一个线程是一个execution context（执行上下文）即一个cpu执行时所需要的一串指令。 线程的工作方式类比：1234567假设你正在读一本书，没有读完，你想休息一下，但是你想在回来时恢复到当时读的具体进度。有一个方法就是记下页数、行数与字数这三个数值，这些数值就是execution context。如果你的室友在你休息的时候，使用相同的方法读这本书。你和她只需要这三个数字记下来就可以在交替的时间共同阅读这本书了。线程的工作方式与此类似。CPU会给你一个在同一时间能够做多个运算的幻觉，实际上它在每个运算上只花了极少的时间，本质上CPU同一时刻只干了一件事。它能这样做就是因为它有每个运算的execution context。就像你能够和你朋友共享同一本书一样，多任务也能共享同一块CPU。 进程的定义：1234一个程序的执行实例就是一个进程。每一个进程提供执行程序所需的所有资源。（进程本质上是资源的集合）一个进程有一个虚拟的地址空间、可执行的代码、操作系统的接口、安全的上下文（记录启动该进程的用户和权限等等）唯一的进程ID、环境变量、优先级类、最小和最大的工作空间（内存空间），还要有至少一个线程。每一个进程启动时都会最先产生一个线程，即主线程。然后主线程会再创建其他的子线程。 文邹邹的讲一下区别（如果你困了，请直接跳至图解进程线程） 同一个进程中的线程共享同一内存空间，但是进程之间是独立的。 同一个进程中的所有线程的数据是共享的（进程通讯），进程之间的数据是独立的。 对主线程的修改可能会影响其他线程的行为，但是父进程的修改（除了删除以外）不会影响其他子进程。 线程是一个上下文的执行指令，而进程则是与运算相关的一簇资源。 同一个进程的线程之间可以直接通信，但是进程之间的交流需要借助中间代理来实现。 创建新的线程很容易，但是创建新的进程需要对父进程做一次复制。 一个线程可以操作同一进程的其他线程，但是进程只能操作其子进程。 线程启动速度快，进程启动速度慢（但是两者运行速度没有可比性）。再配上一张图来对比一下有趣的图解一波程序执行的线程与进程的概念 计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。 假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。 进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程其他进程处于非运行状态. 一个车间里，可以有很多工人。他们协同完成一个任务。 线程就好比车间里的工人。一个进程可以包括多个线程。 车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存。 可是，每间房间的大小不同，有些房间最多只能容纳一个人，比如厕所。里面有人的时候其他人就不能进去了。这代表一个线程使用某些共享内存时，其他线程必须等它结束，才能使用这一块内存 一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队等锁打开再进去。这就叫”互斥锁”（Mutual exclusion，缩写 Mutex），防止多个线程同时读写某一块内存区域。 还有些房间，可以同时容纳n个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。这好比某些内存区域，只能供给固定数目的线程使用。 这时的解决方法，就是在门口挂n把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。后到的人发现钥匙架空了，就知道必须在门口排队等着了。这种做法叫做”信号量”（Semaphore）用来保证多个线程不会互相冲突。不难看出，mutex是semaphore的一种特殊情况（n=1时）。也就是说，完全可以用后者替代前者。但是，因为mutex较为简单，且效率高，所以在必须保证资源独占的情况下，还是采用这种设计。]]></content>
+      <categories>
+        <category>计算机通识课笔记</category>
+      </categories>
+      <tags>
+        <tag>进程&amp;&amp;线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[摸鱼儿·雁丘词]]></title>
+    <url>%2F2018%2F11%2F27%2F%E6%91%B8%E9%B1%BC%E5%84%BF%C2%B7%E9%9B%81%E4%B8%98%E8%AF%8D%2F</url>
+    <content type="text"><![CDATA[雁丘是我QQ用了近7年的网名，我可能应该也是一个怀旧的人会一直用下去，也想和大家分享这首词。 12345678问世间，情为何物？直教生死相许。天南地北双飞客，老翅几回寒暑。欢乐趣，离别苦，就中更有痴儿女。君应有语，渺万里层云，千山暮雪，只影向谁去？横汾路，寂寞当年箫鼓。荒烟依旧平楚。招魂楚些何嗟及，山鬼暗啼风雨。天也妒，未信与，莺儿燕子俱黄土。千秋万古，为留待骚人，狂歌痛饮，来访雁丘处。 第一次读的时候大概是初一，那一年什么都还不懂，唯一留下的记忆就是被这首词惊艳到大概故事梗概为：1234567太和五年，作者去并州参加科举考试。因为出身名门，所以他自小一直受到良好的教育，很早便显露出文学才华。8岁时，因做诗而获得“神童”的美誉。虽然文采出众，但是官运艰涩，多次参加科举也未中选。这次他再一次参加科考，在赴试中遇到一个猎人。这个猎人将一对在天空翱翔的大雁射下一只，另一只在空中盘旋哀鸣，确信伴侣已死，便也头朝地死。大雁的情谊深深打动了作者，于是便有了这首词。作者从猎人手中把一双大雁买下，葬在这个当年箫鼓声声的横汾路，为其坟墓取名“雁丘”。 后来多年，这首词总是跟随着我，仿佛一个可爱的玩具。]]></content>
+      <categories>
+        <category>万物可爱，世间温柔</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[win10如何在任意文件下打开admin的cmd]]></title>
+    <url>%2F2018%2F11%2F26%2Fwin10%E5%A6%82%E4%BD%95%E5%9C%A8%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8B%E6%89%93%E5%BC%80admin%E7%9A%84cmd%2F</url>
+    <content type="text"><![CDATA[win10 的win+cmd 打开控制台你要在跳到某文件夹下要多次的cd cd cd cd一次偶然机会发现可以修改一点点注册表即可实现任意文件下打开终端 第一步：新建任意文本文件复制下列代码1234567891011121314151617Windows Registry Editor Version 5.00[HKEY_CLASSES_ROOT\Directory\shell\runas]@=&quot;Open cmd here as Admin&quot;&quot;HasLUAShield&quot;=&quot;&quot;[HKEY_CLASSES_ROOT\Directory\shell\runas\command]@=&quot;cmd.exe /s /k pushd \&quot;%V\&quot;&quot;[-HKEY_CLASSES_ROOT\Directory\Background\shell\runas][HKEY_CLASSES_ROOT\Directory\Background\shell\runas]@=&quot;Open cmd here as Admin&quot;&quot;HasLUAShield&quot;=&quot;&quot;[HKEY_CLASSES_ROOT\Directory\Background\shell\runas\command]@=&quot;cmd.exe /s /k pushd \&quot;%V\&quot;&quot;[-HKEY_CLASSES_ROOT\Drive\shell\runas][HKEY_CLASSES_ROOT\Drive\shell\runas]@=&quot;Open cmd here as Admin&quot;&quot;HasLUAShield&quot;=&quot;&quot;[HKEY_CLASSES_ROOT\Drive\shell\runas\command] 第二步：修改文件后缀名为.reg(例如 cmd.reg) 第三步：双击有个安全询问弹窗，点击确定即可。 测试：在任意文件夹下，右键有一个“Open cmd here as Admin”（字母能自定义）]]></content>
+      <categories>
+        <category>计算机♂操作</category>
+      </categories>
+  </entry>
+</search>
