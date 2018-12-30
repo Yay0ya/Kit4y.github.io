@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="画画,">
+  <meta name="keywords" content="数据结构,">
 
 
 
@@ -86,30 +86,20 @@
 
 
 
-<meta name="description" content="整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没">
-<meta name="keywords" content="画画">
+<meta name="description" content="一、并查集的介绍 并查集（Union/Find）从名字可以看出，主要涉及两种基本操作:合并和查找。这说明，初始时并查集中的元素是不相交的，经过一系列的基本操作(Union)，最终合并成一个大的集合。而在某次合并之后，有一种合理的需求： 某两个元素是否已经处在同一个集合中了？因此就需要Find操作比如，若某个元素 x 是否在集合 s1 中(Find操作)，返回集合 s1 的代表元素即可。这样，判断两">
+<meta name="keywords" content="数据结构">
 <meta property="og:type" content="article">
-<meta property="og:title" content="万物美好，世间温柔">
-<meta property="og:url" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/index.html">
+<meta property="og:title" content="并查集模板&amp;&amp;杭电畅通工程demo">
+<meta property="og:url" content="http://yoursite.com/2018/12/30/并查集模板-杭电畅通工程demo/index.html">
 <meta property="og:site_name" content="Kitty萌新的卧室">
-<meta property="og:description" content="整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没">
+<meta property="og:description" content="一、并查集的介绍 并查集（Union/Find）从名字可以看出，主要涉及两种基本操作:合并和查找。这说明，初始时并查集中的元素是不相交的，经过一系列的基本操作(Union)，最终合并成一个大的集合。而在某次合并之后，有一种合理的需求： 某两个元素是否已经处在同一个集合中了？因此就需要Find操作比如，若某个元素 x 是否在集合 s1 中(Find操作)，返回集合 s1 的代表元素即可。这样，判断两">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/9.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/4.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/5.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/7.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/8.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/3.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/6.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/10.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/11.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/1.jpg">
-<meta property="og:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/2.jpg">
-<meta property="og:updated_time" content="2018-12-26T18:55:17.675Z">
+<meta property="og:image" content="http://yoursite.com/2018/12/30/并查集模板-杭电畅通工程demo/1.gif">
+<meta property="og:updated_time" content="2018-12-30T12:47:52.085Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="万物美好，世间温柔">
-<meta name="twitter:description" content="整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没">
-<meta name="twitter:image" content="http://yoursite.com/2018/12/27/万物美好，世间温柔/9.jpg">
+<meta name="twitter:title" content="并查集模板&amp;&amp;杭电畅通工程demo">
+<meta name="twitter:description" content="一、并查集的介绍 并查集（Union/Find）从名字可以看出，主要涉及两种基本操作:合并和查找。这说明，初始时并查集中的元素是不相交的，经过一系列的基本操作(Union)，最终合并成一个大的集合。而在某次合并之后，有一种合理的需求： 某两个元素是否已经处在同一个集合中了？因此就需要Find操作比如，若某个元素 x 是否在集合 s1 中(Find操作)，返回集合 s1 的代表元素即可。这样，判断两">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/30/并查集模板-杭电畅通工程demo/1.gif">
 
 
 
@@ -139,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/27/万物美好，世间温柔/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/30/并查集模板-杭电畅通工程demo/">
 
 
 
 
 
-  <title>万物美好，世间温柔 | Kitty萌新的卧室</title>
+  <title>并查集模板&&杭电畅通工程demo | Kitty萌新的卧室</title>
   
 
 
@@ -314,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/万物美好，世间温柔/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/30/并查集模板-杭电畅通工程demo/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kitty">
@@ -331,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">万物美好，世间温柔</h1>
+          <h1 class="post-title" itemprop="name headline">并查集模板&&杭电畅通工程demo</h1>
         
 
         <div class="post-meta">
@@ -343,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T01:59:13+08:00">
-                2018-12-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-30T20:08:35+08:00">
+                2018-12-30
               </time>
             
 
@@ -366,8 +356,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/万物可爱，世间温柔/" itemprop="url" rel="index">
-                    <span itemprop="name">万物可爱，世间温柔</span>
+                  <a href="/categories/NUAA那点事/" itemprop="url" rel="index">
+                    <span itemprop="name">NUAA那点事</span>
                   </a>
                 </span>
 
@@ -403,31 +393,18 @@
       
 
       
-        <h5 id="整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没开心一笑了。"><a href="#整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没开心一笑了。" class="headerlink" title="整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没开心一笑了。"></a>整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没开心一笑了。</h5><h5 id="大学时间过的太快，真的太快，快到你没空停下来看一场电影，但是高三却能追完整个火影。突然看到曾经的画，对于当初那份快乐，现在除了鼻子酸酸，真的只有回味了。望你我珍惜大学时光，不负韶华。"><a href="#大学时间过的太快，真的太快，快到你没空停下来看一场电影，但是高三却能追完整个火影。突然看到曾经的画，对于当初那份快乐，现在除了鼻子酸酸，真的只有回味了。望你我珍惜大学时光，不负韶华。" class="headerlink" title="大学时间过的太快，真的太快，快到你没空停下来看一场电影，但是高三却能追完整个火影。突然看到曾经的画，对于当初那份快乐，现在除了鼻子酸酸，真的只有回味了。望你我珍惜大学时光，不负韶华。"></a>大学时间过的太快，真的太快，快到你没空停下来看一场电影，但是高三却能追完整个火影。突然看到曾经的画，对于当初那份快乐，现在除了鼻子酸酸，真的只有回味了。望你我珍惜大学时光，不负韶华。</h5><h5 id="想了一下还是留几张照片放这里，希望自己能好好生活当一个正常人，当然从技术而言，肯定没法比艺术生，闻道有先后，术业有专攻"><a href="#想了一下还是留几张照片放这里，希望自己能好好生活当一个正常人，当然从技术而言，肯定没法比艺术生，闻道有先后，术业有专攻" class="headerlink" title="想了一下还是留几张照片放这里，希望自己能好好生活当一个正常人，当然从技术而言，肯定没法比艺术生，闻道有先后，术业有专攻"></a>想了一下还是留几张照片放这里，希望自己能好好生活当一个正常人，当然从技术而言，肯定没法比艺术生，闻道有先后，术业有专攻</h5><center> 给老姐的生日礼物</center>
-
-<p><img src="/2018/12/27/万物美好，世间温柔/9.jpg" alt=""><br><a id="more"></a></p>
-<center> 大爱鸣雏</center>
-
-<p><img src="/2018/12/27/万物美好，世间温柔/4.jpg" alt=""><br><img src="/2018/12/27/万物美好，世间温柔/5.jpg" alt=""><br><img src="/2018/12/27/万物美好，世间温柔/7.jpg" alt=""></p>
-<center>夏目</center>
-
-<p><img src="/2018/12/27/万物美好，世间温柔/8.jpg" alt=""><br><img src="/2018/12/27/万物美好，世间温柔/3.jpg" alt=""></p>
-<center>大爱火影（好中二啊 wsl</center>
-
-
-<p><img src="/2018/12/27/万物美好，世间温柔/6.jpg" alt=""></p>
-<center>奇奇怪怪的一些垃圾</center>
-
-<p><img src="/2018/12/27/万物美好，世间温柔/10.jpg" alt=""></p>
-<center>我也不知道是谁的谁</center>
-
-<p><img src="/2018/12/27/万物美好，世间温柔/11.jpg" alt=""></p>
-<center>唯一喜欢的就是右图辣个蓝人</center>
-
-<p><img src="/2018/12/27/万物美好，世间温柔/1.jpg" alt=""></p>
-<center>总感觉这个忙碌的人和我有某种关系♂</center>
-
-<p><div align="center"><img src="/2018/12/27/万物美好，世间温柔/2.jpg" alt=""> </div></p>
+        <h3 id="一、并查集的介绍"><a href="#一、并查集的介绍" class="headerlink" title="一、并查集的介绍"></a>一、并查集的介绍</h3><p> 并查集（Union/Find）从名字可以看出，主要涉及两种基本操作:合并和查找。这说明，初始时并查集中的元素是不相交的，经过一系列的基本操作(Union)，最终合并成一个大的集合。<br>而在某次合并之后，有一种合理的需求： <strong>某两个元素是否已经处在同一个集合中了？因此就需要Find操作</strong><br>比如，若某个元素 x 是否在集合 s1 中(Find操作)，返回集合 s1 的代表元素即可。这样，判断两个元素是否在同一个集合中也是很方便的，只要看find(x) 和 find(y) 是否返回同一个代表即可。<br><a id="more"></a></p>
+<h3 id="二、并查集的存储结构及实现分析"><a href="#二、并查集的存储结构及实现分析" class="headerlink" title="二、并查集的存储结构及实现分析"></a>二、并查集的存储结构及实现分析</h3><h4 id="2-1、存储结构"><a href="#2-1、存储结构" class="headerlink" title="2.1、存储结构"></a>2.1、存储结构</h4><p>并查集(大S)由若干子集合si构成，并查集的<strong>逻辑结构</strong>就是一个森林。si表示森林中的一棵子树。一般以子树的根作为该子树的代表。<br>而对于<strong>实际</strong>的并查集的存储结构，可用一维数组和链表来实现。这里主要介绍一维数组的实现。<br>假设一维数组s中的每个元素 s[i] 表示该元素 i 的父亲。这里有两个需要注意的地方：①我们用一维数组来存储并查集，数组的元素s[i]表示的是结点的父亲的位置。②数组元素的下标 i 则是结点的标识。如：s[5]=4，表示：结点5 的父亲 是结点4。</p>
+<h4 id="2-2、Union操作"><a href="#2-2、Union操作" class="headerlink" title="2.2、Union操作"></a>2.2、Union操作</h4><p>Union操作就是将两个不相交的子集合合并成一个大集合。简单的Union操作是非常容易实现的，因为只需要把一棵子树的根结点指向另一棵子树即可完成合并。</p>
+<h4 id="2-3、Find操作"><a href="#2-3、Find操作" class="headerlink" title="2.3、Find操作"></a>2.3、Find操作</h4><p>Find操作就是查找某个元素所在的集合，返回该集合的代表元素<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">    int r=x;</span><br><span class="line">    while(bin[r]!=r)</span><br><span class="line">        r=bin[r];</span><br><span class="line">    return r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里find(int x)返回的是最里层递归执行后，得到的值。由于只有树根的父结点位置等于父节点数组里对应的值（bin[r]=r），故返回的是树根结点的标识。</p>
+<h4 id="2-4、路径压缩"><a href="#2-4、路径压缩" class="headerlink" title="2.4、路径压缩"></a>2.4、路径压缩</h4><p>思想：我们一开始找到了x的父亲节点，之后，我们随着（X—&gt;X的祖先）这条路，一直把这条路上的所有节点的父节点都标记为祖先节点。从而加快了查找的速度。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int Find(int x)</span><br><span class="line">&#123;</span><br><span class="line">    int k, j, r;</span><br><span class="line">    r = x;</span><br><span class="line">    while(r != parent[r])     //查找跟节点</span><br><span class="line">        r = parent[r];      //找到跟节点，用r记录下</span><br><span class="line">    k = x;        </span><br><span class="line">    while(k != r)             //非递归路径压缩操作</span><br><span class="line">    &#123;</span><br><span class="line">        j = parent[k];         //用j暂存parent[k]的父节点</span><br><span class="line">         parent[k] = r;        //parent[x]指向跟节点</span><br><span class="line">         k = j;                    //k移到父节点</span><br><span class="line">    &#125;</span><br><span class="line">    return r;         //返回根节点的值            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/12/30/并查集模板-杭电畅通工程demo/1.gif" alt=""></p>
+<h3 id="三、例题"><a href="#三、例题" class="headerlink" title="三、例题"></a>三、例题</h3><h4 id="畅通工程"><a href="#畅通工程" class="headerlink" title="畅通工程"></a><center><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1232" target="_blank" rel="noopener">畅通工程</a></center></h4><h4 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h4><p>某省调查城镇交通状况，得到现有城镇道路统计表，表中列出了每条道路直接连通的城镇。省政府“畅通工程”的目标是使全省任何两个城镇间都可以实现交通（但不一定有直接的道路相连，只要互相间接通过道路可达即可）。问最少还需要建设多少条道路？ </p>
+<h4 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h4><p>测试输入包含若干测试用例。每个测试用例的第1行给出两个正整数，分别是城镇数目N ( &lt; 1000 )和道路数目M；随后的M行对应M条道路，每行给出一对正整数，分别是该条道路直接连通的两个城镇的编号。为简单起见，城镇从1到N编号。<br>注意:两个城市之间可以有多条道路相通,也就是说<br>3 3<br>1 2<br>1 2<br>2 1<br>这种输入也是合法的<br>当N为0时，输入结束，该用例不被处理。 </p>
+<h4 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h4><p>对每个测试用例，在1行里输出最少还需要建设的道路数目。 </p>
+<h4 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h4><p>4 2<br>1 3<br>4 3<br>3 3<br>1 2<br>1 3<br>2 3<br>5 2<br>1 2<br>3 5<br>999 0<br>0</p>
+<h4 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h4><p>1<br>0<br>2<br>998<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">int pre[1010];</span><br><span class="line"> </span><br><span class="line">int find(int x)&#123;</span><br><span class="line">	int r,k,j;</span><br><span class="line">	r=x;</span><br><span class="line">	while(pre[r]!=r)&#123;</span><br><span class="line">		r=pre[r];</span><br><span class="line">	&#125;</span><br><span class="line">	k=x;</span><br><span class="line">	while(k!=r)&#123; //路径压缩 </span><br><span class="line">		j=pre[k];</span><br><span class="line">		pre[k]=r;</span><br><span class="line">		k=j;</span><br><span class="line">	&#125;</span><br><span class="line">	return r;</span><br><span class="line">&#125;</span><br><span class="line">int main()&#123;</span><br><span class="line">	int n,m;</span><br><span class="line">	while(scanf(&quot;%d&quot;,&amp;n),n)&#123;</span><br><span class="line">		int i,x,y,c,d;</span><br><span class="line">		for(i=1;i&lt;=n;i++) pre[i]=i;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;m);</span><br><span class="line">		for(i=1;i&lt;=m;i++)&#123;</span><br><span class="line">			scanf(&quot;%d%d&quot;,&amp;x,&amp;y);</span><br><span class="line">			c=find(x);</span><br><span class="line">            d=find(y);</span><br><span class="line">            if(c!=d) //合并 </span><br><span class="line">            &#123;</span><br><span class="line">                    pre[d]=c;</span><br><span class="line">            &#125;</span><br><span class="line">	    &#125;</span><br><span class="line">		int count=-1;</span><br><span class="line">		for(i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			if(pre[i]==i) count++;</span><br><span class="line">		&#125;</span><br><span class="line">		printf(&quot;%d\n&quot;,count);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -445,7 +422,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/画画/" rel="tag"># 画画</a>
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
           
         </div>
       
@@ -458,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/27/如何建立huffmanTree/" rel="next" title="如何建立huffmanTree">
-                <i class="fa fa-chevron-left"></i> 如何建立huffmanTree
+              <a href="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/" rel="next" title="ubuntu中Docker的安装&&遇到的坑&&简单命令">
+                <i class="fa fa-chevron-left"></i> ubuntu中Docker的安装&&遇到的坑&&简单命令
               </a>
             
           </div>
@@ -467,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/" rel="prev" title="ubuntu中Docker的安装&&遇到的坑&&简单命令">
-                ubuntu中Docker的安装&&遇到的坑&&简单命令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -620,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没开心一笑了。"><span class="nav-number">1.</span> <span class="nav-text">整理文件发现了几张初中高中画的画，当初也曾经想过大学学美术，最后还是跟着潮流学了计算机，曾经想过如果家里有钱，我还真去学美术的（当然也不是说学美术就赚不到钱，但是学计算机毕竟现在能独立生活，也曾经想过在大学里，左手程式右手诗，有空就画画，吉他，读诗（想想好中二啊）但是想想而来，入大学到现在，这个“有空”从何而来，也算是我背叛了当初的梦想而苟活至今，当然这也是时代的必然发展，就好比入了大学你有多久没开心一笑了。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#大学时间过的太快，真的太快，快到你没空停下来看一场电影，但是高三却能追完整个火影。突然看到曾经的画，对于当初那份快乐，现在除了鼻子酸酸，真的只有回味了。望你我珍惜大学时光，不负韶华。"><span class="nav-number">2.</span> <span class="nav-text">大学时间过的太快，真的太快，快到你没空停下来看一场电影，但是高三却能追完整个火影。突然看到曾经的画，对于当初那份快乐，现在除了鼻子酸酸，真的只有回味了。望你我珍惜大学时光，不负韶华。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#想了一下还是留几张照片放这里，希望自己能好好生活当一个正常人，当然从技术而言，肯定没法比艺术生，闻道有先后，术业有专攻"><span class="nav-number">3.</span> <span class="nav-text">想了一下还是留几张照片放这里，希望自己能好好生活当一个正常人，当然从技术而言，肯定没法比艺术生，闻道有先后，术业有专攻</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、并查集的介绍"><span class="nav-number">1.</span> <span class="nav-text">一、并查集的介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、并查集的存储结构及实现分析"><span class="nav-number">2.</span> <span class="nav-text">二、并查集的存储结构及实现分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1、存储结构"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、存储结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2、Union操作"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、Union操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3、Find操作"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、Find操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4、路径压缩"><span class="nav-number">2.4.</span> <span class="nav-text">2.4、路径压缩</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、例题"><span class="nav-number">3.</span> <span class="nav-text">三、例题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#畅通工程"><span class="nav-number">3.1.</span> <span class="nav-text">畅通工程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem-Description"><span class="nav-number">3.2.</span> <span class="nav-text">Problem Description</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Input"><span class="nav-number">3.3.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Output"><span class="nav-number">3.4.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sample-Input"><span class="nav-number">3.5.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sample-Output"><span class="nav-number">3.6.</span> <span class="nav-text">Sample Output</span></a></li></ol></li></ol></div>
             
 
           </div>
