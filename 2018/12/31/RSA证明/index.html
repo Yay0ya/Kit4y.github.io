@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="汇编,">
+  <meta name="keywords" content="RSA,">
 
 
 
@@ -86,25 +86,18 @@
 
 
 
-<meta name="description" content="CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文一、数据格式">
-<meta name="keywords" content="汇编">
+<meta name="description" content="一、RSA介绍RSA 加密算法是一种非对称加密算法。在公开密钥加密和电子商业中 RSA 被广泛使用。RSA 是 1977 年由罗纳德 · 李维斯特（Ron Rivest）、阿迪 · 萨莫尔（Adi Shamir）和伦纳德 · 阿德曼（Leonard Adleman）一起提出的。RSA 就是他们三人姓氏开头字母拼在一起组成的。RSA 算法的可靠性由极大整数因数分解的难度决定。换言之，对一极大整数做因">
+<meta name="keywords" content="RSA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础汇编语言">
-<meta property="og:url" content="http://yoursite.com/2018/12/06/基础汇编语言/index.html">
+<meta property="og:title" content="RSA证明">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/RSA证明/index.html">
 <meta property="og:site_name" content="Kitty萌新的卧室">
-<meta property="og:description" content="CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文一、数据格式">
+<meta property="og:description" content="一、RSA介绍RSA 加密算法是一种非对称加密算法。在公开密钥加密和电子商业中 RSA 被广泛使用。RSA 是 1977 年由罗纳德 · 李维斯特（Ron Rivest）、阿迪 · 萨莫尔（Adi Shamir）和伦纳德 · 阿德曼（Leonard Adleman）一起提出的。RSA 就是他们三人姓氏开头字母拼在一起组成的。RSA 算法的可靠性由极大整数因数分解的难度决定。换言之，对一极大整数做因">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/12/06/基础汇编语言/shuju.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/06/基础汇编语言/jicunqi.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/06/基础汇编语言/caozuoshu.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/06/基础汇编语言/move.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/06/基础汇编语言/3-10.png">
-<meta property="og:image" content="http://yoursite.com/2018/12/06/基础汇编语言/3-12.png">
-<meta property="og:updated_time" content="2018-12-24T14:46:02.372Z">
+<meta property="og:updated_time" content="2018-12-31T03:26:27.168Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基础汇编语言">
-<meta name="twitter:description" content="CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文一、数据格式">
-<meta name="twitter:image" content="http://yoursite.com/2018/12/06/基础汇编语言/shuju.png">
+<meta name="twitter:title" content="RSA证明">
+<meta name="twitter:description" content="一、RSA介绍RSA 加密算法是一种非对称加密算法。在公开密钥加密和电子商业中 RSA 被广泛使用。RSA 是 1977 年由罗纳德 · 李维斯特（Ron Rivest）、阿迪 · 萨莫尔（Adi Shamir）和伦纳德 · 阿德曼（Leonard Adleman）一起提出的。RSA 就是他们三人姓氏开头字母拼在一起组成的。RSA 算法的可靠性由极大整数因数分解的难度决定。换言之，对一极大整数做因">
 
 
 
@@ -134,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/06/基础汇编语言/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/RSA证明/">
 
 
 
 
 
-  <title>基础汇编语言 | Kitty萌新的卧室</title>
+  <title>RSA证明 | Kitty萌新的卧室</title>
   
 
 
@@ -309,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/06/基础汇编语言/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/RSA证明/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Kitty">
@@ -326,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基础汇编语言</h1>
+          <h1 class="post-title" itemprop="name headline">RSA证明</h1>
         
 
         <div class="post-meta">
@@ -338,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-06T02:13:14+08:00">
-                2018-12-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T10:48:42+08:00">
+                2018-12-31
               </time>
             
 
@@ -361,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机通识课笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机通识课笔记</span>
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
                   </a>
                 </span>
 
@@ -398,73 +391,23 @@
       
 
       
-        <h2 id="CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文"><a href="#CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文" class="headerlink" title="CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文"></a>CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文</h2><h4 id="一、数据格式"><a href="#一、数据格式" class="headerlink" title="一、数据格式"></a>一、数据格式</h4><p><img src="/2018/12/06/基础汇编语言/shuju.png" alt=""><br><a id="more"></a></p>
-<h4 id="二、x86-64的CPU包含一组16个存储64位值的通用目的寄存器，用来存储整数数据和指针。"><a href="#二、x86-64的CPU包含一组16个存储64位值的通用目的寄存器，用来存储整数数据和指针。" class="headerlink" title="二、x86-64的CPU包含一组16个存储64位值的通用目的寄存器，用来存储整数数据和指针。"></a>二、x86-64的CPU包含一组16个存储64位值的通用目的寄存器，用来存储整数数据和指针。</h4><p><img src="/2018/12/06/基础汇编语言/jicunqi.png" alt=""></p>
-<h4 id="三、访问信息，x86-64的CPU支持多种操作数格式，各种不同操作数可能性被分为三种类型，分为立即数，用来表示常数；寄存器，用来表示某个寄存器的内容；内存引用，根据计算出来的地址访问某个内存位置。"><a href="#三、访问信息，x86-64的CPU支持多种操作数格式，各种不同操作数可能性被分为三种类型，分为立即数，用来表示常数；寄存器，用来表示某个寄存器的内容；内存引用，根据计算出来的地址访问某个内存位置。" class="headerlink" title="三、访问信息，x86-64的CPU支持多种操作数格式，各种不同操作数可能性被分为三种类型，分为立即数，用来表示常数；寄存器，用来表示某个寄存器的内容；内存引用，根据计算出来的地址访问某个内存位置。"></a>三、访问信息，x86-64的CPU支持多种操作数格式，各种不同操作数可能性被分为三种类型，分为立即数，用来表示常数；寄存器，用来表示某个寄存器的内容；内存引用，根据计算出来的地址访问某个内存位置。</h4><p><img src="/2018/12/06/基础汇编语言/caozuoshu.png" alt=""></p>
-<h4 id="四、MOV类"><a href="#四、MOV类" class="headerlink" title="四、MOV类"></a>四、MOV类</h4><p><img src="/2018/12/06/基础汇编语言/move.png" alt=""><br>(ps:最后两个数据传送操作可以将数据压入程序栈中，以及从程序栈中弹出数据。)</p>
-<h4 id="五、整数和逻辑操作"><a href="#五、整数和逻辑操作" class="headerlink" title="五、整数和逻辑操作"></a>五、整数和逻辑操作</h4><p><img src="/2018/12/06/基础汇编语言/3-10.png" alt=""><br>（ps:加载有效地址指令leaq实际上是movq指令的变形。它的指令形式是从内存读数据到寄存器，但实际上并没有引用内存。）</p>
-<h4 id="六、mov和lea指令的区别"><a href="#六、mov和lea指令的区别" class="headerlink" title="六、mov和lea指令的区别"></a>六、mov和lea指令的区别</h4><ul>
-<li>LEA表示负载有效地址</li>
-<li>MOV平均负荷值</li>
-</ul>
-<p>简而言之，LEA加载指向你要寻址的项的指针，而MOV则在该地址加载实际值。<br><strong>例如</strong>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov ecx,[eax+0x30]表示先运算eax+0x30得到一个结果,以这个结果为地址找一个ecx长度的内存数赋给ecx</span><br><span class="line">lea ecx,[eax+0x30]表示先运算eax+0x30得到一个结果,把这个结果(mov时地址)赋给ecx</span><br><span class="line">效果为ecx=eax+0x30  (这里eax参与了运算却没有改变值)</span><br></pre></td></tr></table></figure></p>
-<h4 id="七、条件控制"><a href="#七、条件控制" class="headerlink" title="七、条件控制"></a>七、条件控制</h4><p><strong>跳转指令分三类：</strong></p>
-<ul>
-<li>无条件跳转: JMP;</li>
-<li>根据 CX、ECX 寄存器的值跳转: JCXZ(CX 为 0 则跳转)、JECXZ(ECX 为 0 则跳转);</li>
-<li>根据 EFLAGS 寄存器的标志位跳转, 以下罗列.</li>
-</ul>
-<p><strong>根据标志位跳转的指令：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">JE   ;等于则跳转</span><br><span class="line">JNE  ;不等于则跳转</span><br><span class="line"></span><br><span class="line">JZ   ;为 0 则跳转</span><br><span class="line">JNZ  ;不为 0 则跳转</span><br><span class="line"></span><br><span class="line">JS   ;为负则跳转</span><br><span class="line">JNS  ;不为负则跳转</span><br><span class="line"></span><br><span class="line">JC   ;进位则跳转</span><br><span class="line">JNC  ;不进位则跳转</span><br><span class="line"></span><br><span class="line">JO   ;溢出则跳转</span><br><span class="line">JNO  ;不溢出则跳转</span><br><span class="line"></span><br><span class="line">JA   ;无符号大于则跳转</span><br><span class="line">JNA  ;无符号不大于则跳转</span><br><span class="line">JAE  ;无符号大于等于则跳转</span><br><span class="line">JNAE ;无符号不大于等于则跳转</span><br><span class="line"></span><br><span class="line">JG   ;有符号大于则跳转</span><br><span class="line">JNG  ;有符号不大于则跳转</span><br><span class="line">JGE  ;有符号大于等于则跳转</span><br><span class="line">JNGE ;有符号不大于等于则跳转</span><br><span class="line"></span><br><span class="line">JB   ;无符号小于则跳转</span><br><span class="line">JNB  ;无符号不小于则跳转</span><br><span class="line">JBE  ;无符号小于等于则跳转</span><br><span class="line">JNBE ;无符号不小于等于则跳转</span><br><span class="line"></span><br><span class="line">JL   ;有符号小于则跳转</span><br><span class="line">JNL  ;有符号不小于则跳转</span><br><span class="line">JLE  ;有符号小于等于则跳转</span><br><span class="line">JNLE ;有符号不小于等于则跳转</span><br><span class="line"></span><br><span class="line">JP   ;奇偶位置位则跳转</span><br><span class="line">JNP  ;奇偶位清除则跳转</span><br><span class="line">JPE  ;奇偶位相等则跳转</span><br><span class="line">JPO  ;奇偶位不等则跳转</span><br></pre></td></tr></table></figure></p>
-<p><strong>跳转相关的标志位:</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">11</th>
-<th style="text-align:center">10</th>
-<th style="text-align:center">9</th>
-<th style="text-align:center">8</th>
-<th style="text-align:center">7</th>
-<th style="text-align:center">6</th>
-<th style="text-align:center">5</th>
-<th style="text-align:center">4</th>
-<th style="text-align:center">3</th>
-<th style="text-align:center">2</th>
-<th style="text-align:center">1</th>
-<th style="text-align:center">0</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">OF</td>
-<td style="text-align:center">DF</td>
-<td style="text-align:center">IF</td>
-<td style="text-align:center">TF</td>
-<td style="text-align:center">SF</td>
-<td style="text-align:center">ZF</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">AF</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">PF</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">CF</td>
-</tr>
-<tr>
-<td style="text-align:center">溢出</td>
-<td style="text-align:center">DF</td>
-<td style="text-align:center">IF</td>
-<td style="text-align:center">TF</td>
-<td style="text-align:center">符号</td>
-<td style="text-align:center">零</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">辅助</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">奇偶</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">进位</td>
-</tr>
-</tbody>
-</table>
-<h4 id="八、特殊算术"><a href="#八、特殊算术" class="headerlink" title="八、特殊算术"></a>八、特殊算术</h4><p><img src="/2018/12/06/基础汇编语言/3-12.png" alt=""></p>
+        <h3 id="一、RSA介绍"><a href="#一、RSA介绍" class="headerlink" title="一、RSA介绍"></a>一、RSA介绍</h3><p>RSA 加密算法是一种非对称加密算法。在公开密钥加密和电子商业中 RSA 被广泛使用。RSA 是 1977 年由罗纳德 · 李维斯特（Ron Rivest）、阿迪 · 萨莫尔（Adi Shamir）和伦纳德 · 阿德曼（Leonard Adleman）一起提出的。RSA 就是他们三人姓氏开头字母拼在一起组成的。<br>RSA 算法的可靠性由极大整数因数分解的难度决定。换言之，对一极大整数做因数分解愈困难，RSA 算法愈可靠。假如有人找到一种快速因数分解的算法的话，那么用 RSA 加密的信息的可靠性就肯定会极度下降。但找到这样的算法的可能性是非常小的。如今，只有短的 RSA 密钥才可能被强力方式解破。到 2017 年为止，还没有任何可靠的攻击 RSA 算法的方式。<br><a id="more"></a></p>
+<h3 id="二、已知条件"><a href="#二、已知条件" class="headerlink" title="二、已知条件"></a>二、已知条件</h3><p>RSA的加密规则：$ \color{blue}{m^e \equiv c\pmod n}$<br>RSA的解密规则：$\color{red}{c^d \equiv m\pmod n}$</p>
+<p>约束条件及规则说明：</p>
+<ol>
+<li>m为明文字符，c为密文字符</li>
+<li>m为0到n-1之间的数值</li>
+<li>n=pq，p,q为素数</li>
+<li>φ(n)=(p-1)*(q-1) [根据欧拉定理]</li>
+<li>e与φ(n)互素</li>
+<li>$ ed \equiv 1\pmod {φ(n)}$</li>
+<li>欧拉公式$m^φ(n) \equiv 1\pmod n$</li>
+</ol>
+<p>要根据加密规则，数论及欧拉定理，来证明解密公式正确性：$\color{red}{c^d \equiv m\pmod n}$</p>
+<h3 id="三、证明过程"><a href="#三、证明过程" class="headerlink" title="三、证明过程"></a>三、证明过程</h3><p><strong>step1</strong>、根据加密规则公式$ \color{blue}{m^e \equiv c\pmod n}$<br>可以得出 $$c=m^e-kn$$<br><strong>step2</strong>、 将C带入解密公式，得到<br>$$(m^e-kn)^d \equiv m\pmod n$$<br><strong>step3</strong>、左边的展开中，除了第一项以外，其他项都与n想乘过，所以可以直接忽略左边括号中的kn项目，即：<br>$$m^{ed} \equiv m\pmod n$$<br><strong>step4</strong>、因为 $ed\equiv1 \pmod {φ(n)}$ 即：<br> $$ed=hφ(n)+1$$<br><strong>step5</strong>、上述结论代入step3的公式，得到<br>$$m^{hφ(n)+1} \equiv m \pmod n $$<br><strong>step6</strong>、分情况讨论<br>6.1 、<strong>m与n互质</strong>（如果你已经忘了m和n是什么了，请往前再看一遍）<br>根据欧拉定理$m^φ(n) \equiv 1\pmod n$ 得到 $m^{φ(n)}=kn+1$<br>然后左右两边分别h次放得到(kn+1)的h次方还是kn+1只不过这里的k变了：<br>$$(m^{φ(n)})^h=kn+1$$<br>然后左右两边乘以m即得到$$m^{hφ(n)+1} \equiv m \pmod n $$<br>6.2 、<strong>m与n不互质</strong><br>此时，由于n等于质数p和q的乘积，所以m必然等于kp或kq。<br>以 m = kp为例，这时k与q必然互质。如果k与q 不为互质关系，则k=tq, m= tqp=tn, 但是按照RSA规范，m∈(0…n−1) m\in(0…n-1)m∈(0…n−1), m &lt; n的，所以k与q肯定是互质关系的。由于k与q互质，怕与q互质，kp与q肯定互质，则根据欧拉定理，下面的式子成立：<br>$$\Large (kp)^{ q-1} \equiv 1\pmod q$$<br>进一步扩展，可得：<br>$$ \Large [(kp)^{ q-1}]^{h(p-1)}\times kp \equiv kp\pmod q$$<br>即<br>$$\Large (kp)^{ed} \equiv kp\pmod q$$<br>进一步改写成等式：<br>$$\Large (kp)^{ed} = kp+tq$$</p>
+<p>显然，t能被p整除， 即t=t’p,可以得出<br>$$\Large (kp)^{ed} = kp+t’pq$$</p>
+<p>因为m=kp, n=pq, 最后得出<br>$$\Large m^{ed} \equiv m\pmod n$$<br>解密公式得到完全证明。</p>
+<h3 id="四、关于共模攻击脚本（其他的脚本要求安一堆奇怪的包，在win10还装不上，这里贴一个野生的共模攻击脚本"><a href="#四、关于共模攻击脚本（其他的脚本要求安一堆奇怪的包，在win10还装不上，这里贴一个野生的共模攻击脚本" class="headerlink" title="四、关于共模攻击脚本（其他的脚本要求安一堆奇怪的包，在win10还装不上，这里贴一个野生的共模攻击脚本"></a>四、关于共模攻击脚本（其他的脚本要求安一堆奇怪的包，在win10还装不上，这里贴一个野生的共模攻击脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line">import sys</span><br><span class="line">sys.setrecursionlimit(10000000)</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">选择相同的模 n 加密相同的信息 m</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">helpstr = &apos;&apos;&apos;</span><br><span class="line">usage:</span><br><span class="line">    c1 = m ^ e1 % n</span><br><span class="line">    c2 = m ^ e2 % n</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def egcd(a, b):</span><br><span class="line">    if a == 0:</span><br><span class="line">        return (b, 0, 1)</span><br><span class="line">    else:</span><br><span class="line">        g, y, x = egcd(b % a, a)</span><br><span class="line">        return (g, x - (b // a) * y, y)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def modinv(a, m):</span><br><span class="line">    g, x, y = egcd(a, m)</span><br><span class="line">    if g != 1:</span><br><span class="line">        raise Exception(&apos;modular inverse does not exist&apos;)</span><br><span class="line">    else:</span><br><span class="line">        return x % m</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def main():</span><br><span class="line">    print(helpstr)</span><br><span class="line">    n = int(input(&quot;input n: &quot;))</span><br><span class="line">    c1 = int(input(&quot;input c1: &quot;))</span><br><span class="line">    c2 = int(input(&quot;input c2: &quot;))</span><br><span class="line">    e1 = int(input(&quot;input e1: &quot;))</span><br><span class="line">    e2 = int(input(&quot;input e2: &quot;))</span><br><span class="line">    s = egcd(e1, e2)</span><br><span class="line">    s1 = s[1]</span><br><span class="line">    s2 = s[2]</span><br><span class="line">    # 求模反元素</span><br><span class="line">    if s1 &lt; 0:</span><br><span class="line">        s1 = - s1</span><br><span class="line">        c1 = modinv(c1, n)</span><br><span class="line">    elif s2 &lt; 0:</span><br><span class="line">        s2 = - s2</span><br><span class="line">        c2 = modinv(c2, n)</span><br><span class="line">    m = (c1**s1)*(c2**s2) % n</span><br><span class="line">    print(m)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -482,7 +425,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/汇编/" rel="tag"># 汇编</a>
+            <a href="/tags/RSA/" rel="tag"># RSA</a>
           
         </div>
       
@@ -495,8 +438,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/06/CSAPP又双叒叕来一遍之程序的机器级表示/" rel="next" title="CSAPP又双叒叕来一遍之程序的机器级表示">
-                <i class="fa fa-chevron-left"></i> CSAPP又双叒叕来一遍之程序的机器级表示
+              <a href="/2018/12/30/并查集模板-杭电畅通工程demo/" rel="next" title="并查集模板&&杭电畅通工程demo">
+                <i class="fa fa-chevron-left"></i> 并查集模板&&杭电畅通工程demo
               </a>
             
           </div>
@@ -504,10 +447,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/06/gcc-gdb/" rel="prev" title="gcc && gdb">
-                gcc && gdb <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -657,7 +596,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文"><span class="nav-number">1.</span> <span class="nav-text">CSAPP真的是一本神书，怕自己忘记，所以本博客大量截图书中原文</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、数据格式"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、数据格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、x86-64的CPU包含一组16个存储64位值的通用目的寄存器，用来存储整数数据和指针。"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、x86-64的CPU包含一组16个存储64位值的通用目的寄存器，用来存储整数数据和指针。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、访问信息，x86-64的CPU支持多种操作数格式，各种不同操作数可能性被分为三种类型，分为立即数，用来表示常数；寄存器，用来表示某个寄存器的内容；内存引用，根据计算出来的地址访问某个内存位置。"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、访问信息，x86-64的CPU支持多种操作数格式，各种不同操作数可能性被分为三种类型，分为立即数，用来表示常数；寄存器，用来表示某个寄存器的内容；内存引用，根据计算出来的地址访问某个内存位置。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、MOV类"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、MOV类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、整数和逻辑操作"><span class="nav-number">1.0.5.</span> <span class="nav-text">五、整数和逻辑操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、mov和lea指令的区别"><span class="nav-number">1.0.6.</span> <span class="nav-text">六、mov和lea指令的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、条件控制"><span class="nav-number">1.0.7.</span> <span class="nav-text">七、条件控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、特殊算术"><span class="nav-number">1.0.8.</span> <span class="nav-text">八、特殊算术</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、RSA介绍"><span class="nav-number">1.</span> <span class="nav-text">一、RSA介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、已知条件"><span class="nav-number">2.</span> <span class="nav-text">二、已知条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、证明过程"><span class="nav-number">3.</span> <span class="nav-text">三、证明过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、关于共模攻击脚本（其他的脚本要求安一堆奇怪的包，在win10还装不上，这里贴一个野生的共模攻击脚本"><span class="nav-number">4.</span> <span class="nav-text">四、关于共模攻击脚本（其他的脚本要求安一堆奇怪的包，在win10还装不上，这里贴一个野生的共模攻击脚本</span></a></li></ol></div>
             
 
           </div>
