@@ -94,13 +94,12 @@
 <meta property="og:site_name" content="Kitty萌新的卧室">
 <meta property="og:description" content="virtualenv干啥的python2与python3版本不兼容确实很蛋疼，虽然随着时间发展python3一定会将python2取代但是确实现在还有很多项目依赖于python2，virtualenv通过创建一个虚拟化的python运行环境，将我们所需的依赖安装进去的，不同项目之间相互不干扰。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/12/20/win10-环境下使用virtualenv搭建py虚拟环境/1.PNG">
 <meta property="og:image" content="http://yoursite.com/2018/12/20/win10-环境下使用virtualenv搭建py虚拟环境/2.PNG">
-<meta property="og:updated_time" content="2018-12-24T14:45:34.893Z">
+<meta property="og:updated_time" content="2019-01-01T15:36:36.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="win10环境下使用virtualenv搭建py虚拟环境">
 <meta name="twitter:description" content="virtualenv干啥的python2与python3版本不兼容确实很蛋疼，虽然随着时间发展python3一定会将python2取代但是确实现在还有很多项目依赖于python2，virtualenv通过创建一个虚拟化的python运行环境，将我们所需的依赖安装进去的，不同项目之间相互不干扰。">
-<meta name="twitter:image" content="http://yoursite.com/2018/12/20/win10-环境下使用virtualenv搭建py虚拟环境/1.PNG">
+<meta name="twitter:image" content="http://yoursite.com/2018/12/20/win10-环境下使用virtualenv搭建py虚拟环境/2.PNG">
 
 
 
@@ -402,7 +401,7 @@
 <h4 id="激活和冻结"><a href="#激活和冻结" class="headerlink" title="激活和冻结"></a>激活和冻结</h4><p>在windows中 virtualenv新建一个文件在venvdemo/Scripts中有activate.bat与deactivate.bat用以激活<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 定位到新建虚拟环境env 的Script 目录下</span><br><span class="line">activate.bat</span><br><span class="line">#虚拟环境处于激活状态，显示如下#</span><br><span class="line">(env)C:\Users\env\Scripts&gt;</span><br><span class="line"># 冻结env 环境#</span><br><span class="line">deactivate.bat</span><br><span class="line"># 输入deactivate.bat命令后，冻结状态显示如下#</span><br><span class="line">C:\Users\env\Scripts&gt;</span><br></pre></td></tr></table></figure></p>
 <h2 id="virtualenvwrapper-win-安装-和使用"><a href="#virtualenvwrapper-win-安装-和使用" class="headerlink" title="virtualenvwrapper-win 安装 和使用"></a>virtualenvwrapper-win 安装 和使用</h2><p>virtualenvwrapper-win 是Windows下对于虚拟环境的管理工具，相当于你有很多小工具，现在买一个工具包来整理一下这些小工具</p>
 <h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenvwrapper-win</span><br></pre></td></tr></table></figure>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>首先，设置virtualenvwrapper-win 的默认环境目录 ： 在win10中，添加系统环境变量 WORKON_HOME,指向 path/dir  (自己想要的虚拟环境目录位置如图，之后将在这个固定文件下搭建环境)<br><img src="/2018/12/20/win10-环境下使用virtualenv搭建py虚拟环境/1.PNG" alt=""></p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>首先，设置virtualenvwrapper-win 的默认环境目录 ： 在win10中，添加系统环境变量 WORKON_HOME,指向 path/dir  (自己想要的虚拟环境目录位置，之后将在这个固定文件下搭建环境)</p>
 <h4 id="进入和退出虚拟环境"><a href="#进入和退出虚拟环境" class="headerlink" title="进入和退出虚拟环境"></a>进入和退出虚拟环境</h4><p>查看当前有哪些环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsvirtualenv或者workon</span><br></pre></td></tr></table></figure></p>
 <p>进入某个环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workon &#123;环境的名字&#125;</span><br></pre></td></tr></table></figure></p>
 <p>退出某个环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate &#123;环境的名字&#125;</span><br></pre></td></tr></table></figure></p>
