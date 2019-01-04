@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/16.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/17.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/6.png">
-<meta property="og:updated_time" content="2018-12-28T16:20:31.265Z">
+<meta property="og:updated_time" content="2019-01-04T03:15:50.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ubuntu中Docker的安装&amp;&amp;遇到的坑&amp;&amp;简单命令">
 <meta name="twitter:description" content="1、前提条件 本博客基于ubuntuDocker 要求 Ubuntu 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的 Ubuntu 版本是否支持 Docker。通过 uname -r 命令查看你当前的内核版本1runoob@runoob:~$ uname -r">
@@ -416,7 +416,7 @@
 <p>然后重启<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@ubuntu:~# service docker restart</span><br></pre></td></tr></table></figure></p>
 <h4 id="2-3、无法获得锁-var-lib-apt-lists-lock-open-11-资源暂时不可用"><a href="#2-3、无法获得锁-var-lib-apt-lists-lock-open-11-资源暂时不可用" class="headerlink" title="2.3、无法获得锁 /var/lib/apt/lists/lock - open (11: 资源暂时不可用)"></a>2.3、无法获得锁 /var/lib/apt/lists/lock - open (11: 资源暂时不可用)</h4><p>出现这个问题的原因可能是有另外一个程序正在运行，导致资源被锁不可用。而导致资源被锁的原因，可能是上次安装时没正常完成，而导致出现此状况。<br>有两种方法<br>1、通过删除文件（实测方法2友好一些<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/cache/apt/archives/lock</span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br></pre></td></tr></table></figure></p>
 <p>2、通过ps查看apt-get的PID 然后sudo kill 就可以<br><img src="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/5.png" alt=""></p>
-<h3 id="3、然后就是基本命令"><a href="#3、然后就是基本命令" class="headerlink" title="3、然后就是基本命令"></a>3、然后就是基本命令</h3><h4 id="3、1-添加用户组"><a href="#3、1-添加用户组" class="headerlink" title="3、1:添加用户组"></a>3、1:添加用户组</h4><p>默认来说docker只能sudo运行为了下次方面使用，可以添加用户到docker用户组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker $&#123;USER&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3、然后就是基本命令"><a href="#3、然后就是基本命令" class="headerlink" title="3、然后就是基本命令"></a>3、然后就是基本命令</h3><h4 id="3、1-添加用户组"><a href="#3、1-添加用户组" class="headerlink" title="3、1:添加用户组"></a>3、1:添加用户组</h4><p>默认来说docker只能sudo运行为了下次方便使用，可以添加用户到docker用户组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker $&#123;USER&#125;</span><br></pre></td></tr></table></figure></p>
 <p><img src="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/8.png" alt=""><br>然后下次登陆即可非root使用docker</p>
 <h4 id="3、2-查看Docker版本信息"><a href="#3、2-查看Docker版本信息" class="headerlink" title="3、2:查看Docker版本信息"></a>3、2:查看Docker版本信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
 <p><img src="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/7.png" alt=""></p>
@@ -426,7 +426,7 @@
 <p>比如你要一个nginx镜像<br><img src="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/10.png" alt=""><br>然后你就可以使用docker images 查看安装了哪些</p>
 <h4 id="3、5：普通运行"><a href="#3、5：普通运行" class="headerlink" title="3、5：普通运行"></a>3、5：普通运行</h4><p>docker run -t -i ubuntu /bin/bash命令指定使用镜像ubuntu来启动一个容器 其中要保证ubuntu是images中已经存在的镜像<br>-it 表示运行在交互模式，是-i -t的缩写，即-it是两个参数：-i和-t。前者表示打开并保持stdout，后者表示分配一个终端（pseudo-tty）一般这个模式就是可以启动bash，然后和容器有命令行的交互<br><img src="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/12.png" alt=""></p>
 <h4 id="3、6：查看当前正在运行的容器："><a href="#3、6：查看当前正在运行的容器：" class="headerlink" title="3、6：查看当前正在运行的容器："></a>3、6：查看当前正在运行的容器：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ docker ps</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/13.png" alt=""><br>其中加上-a 表示查看所有的容器，包括以及停了的</p>
+<p><img src="/2018/12/28/ubuntu中Docker的安装-遇到的坑-简单命令/13.png" alt=""><br>其中加上-a 表示查看所有的容器，包括已经停了的</p>
 <h4 id="3、7：启动、停止、重启容器"><a href="#3、7：启动、停止、重启容器" class="headerlink" title="3、7：启动、停止、重启容器"></a>3、7：启动、停止、重启容器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~$ docker start aa97ba3292ce</span><br><span class="line">~$ docker stop aa97ba3292ce</span><br><span class="line">~$ docker restart aa97ba3292ce</span><br></pre></td></tr></table></figure>
 <p>和容器有关的一般是容器的ID </p>
 <h4 id="3、8：-删除镜像或者容器"><a href="#3、8：-删除镜像或者容器" class="headerlink" title="3、8： 删除镜像或者容器"></a>3、8： 删除镜像或者容器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~$ docker rm container_id</span><br><span class="line">~$ docker rmi image_id</span><br></pre></td></tr></table></figure>
