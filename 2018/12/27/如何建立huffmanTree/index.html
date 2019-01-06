@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/12/27/如何建立huffmanTree/5.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/27/如何建立huffmanTree/2.png">
 <meta property="og:image" content="http://yoursite.com/2018/12/27/如何建立huffmanTree/3.png">
-<meta property="og:updated_time" content="2019-01-06T00:16:03.384Z">
+<meta property="og:updated_time" content="2019-01-06T00:20:52.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何建立huffmanTree">
 <meta name="twitter:description" content="1、一些基本概念1.1、定义哈夫曼树，又称最优树，是一类带权路径长度最短的树(为了防止前缀重复，所有数据一定为树叶)。 1.2、路径和路径长度从树中一个结点到另一个结点之间的分支构成两个结点的路径，路径上的分支数目叫做路径长度。树的路径长度是从树根到每一个结点的路径长度之和。">
@@ -401,9 +401,9 @@
 <h4 id="1-2、路径和路径长度"><a href="#1-2、路径和路径长度" class="headerlink" title="1.2、路径和路径长度"></a>1.2、路径和路径长度</h4><p>从树中一个结点到另一个结点之间的分支构成两个结点的路径，路径上的分支数目叫做路径长度。树的路径长度是从树根到每一个结点的路径长度之和。<br><a id="more"></a></p>
 <h4 id="1-3、带权路径长度"><a href="#1-3、带权路径长度" class="headerlink" title="1.3、带权路径长度"></a>1.3、带权路径长度</h4><p>结点的带权路径长度为从该结点到树根之间的路径长度与结点上权的乘积。树的带权路径长度为树中所有叶子结点的带权路径长度之和，通常记作WPL。</p>
 <p>若有n个权值为w1,w2,…,wn的结点构成一棵有n个叶子结点的二叉树，则树的带权路径最小的二叉树叫做哈夫曼树或最优二叉树。<br><img src="/2018/12/27/如何建立huffmanTree/1.png" alt=""><br>在上图中，3棵二叉树都有4个叶子结点a、b、c、d，分别带权7、5、2、4，则它们的带权路径长度为</p>
-<p>（a）$WPL = 7 <em> 2 + 5 </em> 2 + 2 <em> 2 + 4 </em> 2 = 36$</p>
-<p>（b）$WPL = 4 <em> 2 + 7 </em> 3 + 5 <em> 3 + 2 </em> 1 = 46$</p>
-<p>（c）$WPL = 7 <em> 1 + 5 </em> 2 + 2 <em> 3 + 4 </em> 3 = 35$</p>
+<p>（a）WPL = 7 × 2 + 5 × 2 + 2 × 2 + 4 × 2 = 36</p>
+<p>（b）WPL = 4 × 2 + 7 × 3 + 5 × 3 + 2 × 1 = 46</p>
+<p>（c）WPL = 7 × 1 + 5 × 2 + 2 × 3 + 4 × 3 = 35</p>
 <p>其中（c）的WPL最小，可以验证，（c）恰为哈夫曼树。</p>
 <h3 id="2、数据结构表示"><a href="#2、数据结构表示" class="headerlink" title="2、数据结构表示"></a>2、数据结构表示</h3><h4 id="2-1、结点表示"><a href="#2-1、结点表示" class="headerlink" title="2.1、结点表示"></a>2.1、结点表示</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line">	int weight;</span><br><span class="line">	int parent;</span><br><span class="line">	int lchild,rchild;</span><br><span class="line">&#125;HuffmanTreeNode;</span><br></pre></td></tr></table></figure>
 <h4 id="2-2、一些数据关系"><a href="#2-2、一些数据关系" class="headerlink" title="2.2、一些数据关系"></a>2.2、一些数据关系</h4><p>1、哈夫曼树除了根结点，其他结点度数都为<strong>2</strong><br>2、m=2<em>n-1(m代表总结点个数，n代表树叶结点个数)<br>证明:<br>因为 结点总数=度数为0 1 2之和=度数为1+ 2</em>度数为2 +1（根节点）<br>所以 叶子结点数=度数为2的结点数+1<br>所以total=叶子+度数为2=2*n-1 得证</p>
