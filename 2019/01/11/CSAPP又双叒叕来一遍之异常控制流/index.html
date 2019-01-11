@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="异常控制流&&进程,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="小声bb,几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。异常控制流这章个人">
+<meta name="keywords" content="异常控制流&amp;&amp;进程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP又双叒叕来一遍之异常控制流">
+<meta property="og:url" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/index.html">
+<meta property="og:site_name" content="Kitty萌新的卧室">
+<meta property="og:description" content="小声bb,几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。异常控制流这章个人">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/1.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/2.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/3.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/4.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/5.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/6.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/7.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/8.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/9.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/10.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/11.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/1.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/2.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/12.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/13.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/14.webp">
+<meta property="og:updated_time" content="2019-01-11T06:37:15.936Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSAPP又双叒叕来一遍之异常控制流">
+<meta name="twitter:description" content="小声bb,几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。异常控制流这章个人">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/1.webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/">
+
+
+
+
+
+  <title>CSAPP又双叒叕来一遍之异常控制流 | Kitty萌新的卧室</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kitty萌新的卧室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kitty">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/jangshi.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kitty萌新的卧室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSAPP又双叒叕来一遍之异常控制流</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-11T11:49:12+08:00">
+                2019-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="小声bb-几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。"><a href="#小声bb-几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。" class="headerlink" title="小声bb,几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。"></a>小声bb,几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。</h4><h3 id="异常控制流这章个人感觉精华除了异常外，讲进程的真的精髓"><a href="#异常控制流这章个人感觉精华除了异常外，讲进程的真的精髓" class="headerlink" title="异常控制流这章个人感觉精华除了异常外，讲进程的真的精髓"></a>异常控制流这章个人感觉精华除了异常外，讲进程的真的精髓</h3><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/1.webp" alt=""><br><a id="more"></a></p>
+<h3 id="1、异常控制流（Exceptional-Contro-Flow）处理过程"><a href="#1、异常控制流（Exceptional-Contro-Flow）处理过程" class="headerlink" title="1、异常控制流（Exceptional Contro Flow）处理过程"></a>1、异常控制流（Exceptional Contro Flow）处理过程</h3><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/2.webp" alt=""><br>这一过程如上图所示，应用程序本来在执行Icur指令，但是有些事件（定时器信号、算术溢出等）会使得处理器的状态发生变化，这时候处理器会通过一张异常跳转表，进行跳转到专门的异常处理程序中，异常处理程序执行完任务以后：可能返回当前正在执行指令、返回当前下一条指令或者终止被中断的程序。</p>
+<h4 id="1-1、异常表-amp-amp-异常表基地址"><a href="#1-1、异常表-amp-amp-异常表基地址" class="headerlink" title="1.1、异常表&amp;&amp;异常表基地址"></a>1.1、异常表&amp;&amp;异常表基地址</h4><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/3.webp" alt=""><br>系统中可能出现的异常都被分配了一个唯一的非负整数的异常号（exception number)，而异常表储存异常号对应的一个异常处理程序<br><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/4.webp" alt=""><br>当你本机发生一个异常后，你只能拿到这个异常的异常号，你要触发一个异常的处理，你要拿到该异常处理程序的地址，所以通过异常表基寄存器+异常号获得异常表的数据而执行异常处理。</p>
+<h4 id="1-2、四大异常分类"><a href="#1-2、四大异常分类" class="headerlink" title="1.2、四大异常分类"></a>1.2、四大异常分类</h4><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/5.webp" alt=""></p>
+<h5 id="（1）中断"><a href="#（1）中断" class="headerlink" title="（1）中断"></a>（1）中断</h5><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/6.webp" alt=""><br>中断：是异步发生的，来自处理外部的I/O设备信号的结果.（设备信号之后会详讲<br>实例：当手机播放器在公放音乐的时候，你突然打开某大游戏可能音乐暂时卡住，大概一瞬间后歌曲继续播放，当然大家手机tql，时间太短，感觉不到。（可能我讲的有问题，可能只是突出穷买不起好手机吧，嘤嘤嘤</p>
+<h5 id="（2）陷阱和系统调用"><a href="#（2）陷阱和系统调用" class="headerlink" title="（2）陷阱和系统调用"></a>（2）陷阱和系统调用</h5><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/7.webp" alt=""><br>实现系统调用，在用户程序和内核之间提供一个像函数调用一样的接口。<br>（csapp原书上的实例）比如要读一个文件的内容（read），这些内核服务受到控制的访问，处理器提供的是syscall n指令来响应用户的请求，导致一个陷阱异常，这个异常程序对参数解码并调用内核程序。这个异常处理程序运行在内核模式中。</p>
+<h5 id="（3）故障"><a href="#（3）故障" class="headerlink" title="（3）故障"></a>（3）故障</h5><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/8.webp" alt=""><br>故障发生时，处理器将控制转移到故障处理程序中，由故障处理程序修正错误。如果能够修正就返回当前指令重新执行，如果不能修正就返回到内核的abort中。<br>（csapp原书上的实例）缺页异常，当指令使用一个虚拟地址，但是该地址对应的物理地址在内存中找不到，所以必须从磁盘中取出，就会发生故障。</p>
+<p>#####（4）终止<br>通常是由一些硬件引起的不可恢复的致命错误<br>直接返回到abort中，终止该应用程序。</p>
+<h4 id="2、进程"><a href="#2、进程" class="headerlink" title="2、进程"></a>2、进程</h4><p>之前写过线程与进程的暧昧缠绵，但是只是从功能上讲，为了友好些有很多沙雕图，也没有讲那么详细对于进程最经典的定义就是一个执行中的程序实例。进程是一个伟大的魔术师，她提供给每个运行的程序一种假象，好像每个程序都在独占处理器和地址空间。其实主要思想就是逻辑控制流和私有地址空间。</p>
+<h5 id="2-1、进程控制流"><a href="#2-1、进程控制流" class="headerlink" title="2.1、进程控制流"></a>2.1、进程控制流</h5><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/9.webp" alt=""><br>上图是一个运行了三个进程A、B、C的系统，处理器的控制流分成了3个，每一个进程1个。随着时间的增加，进程A先运行了一小段（①），然后进程B运行直到结束（②），随后进程C运行了一小段（③）后切换到进程A运行直到A结束（④），最后切换到进程C运行直到结束（⑤）。这样一来每个进程执行它的流的一部分，然后被抢占。由于CPU总是毫秒级别的转移我们什么都不会察觉到。就提供了一种每个程序独占的假象。<br>时间片：进程A执行它控制流的一部分的每个时间片段，就叫时间片。</p>
+<h5 id="2-2、私有地址空间"><a href="#2-2、私有地址空间" class="headerlink" title="2.2、私有地址空间"></a>2.2、私有地址空间</h5><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/10.webp" alt=""><br>这张图放过很多次了，在内存那章会详细讲<br>这个私有的地址空间最上部是内核保留的，最下部是预留给用户程序的。代码始终是从0x08048000处开始（32位系统）。</p>
+<h5 id="2-3、用户模式和内核模式"><a href="#2-3、用户模式和内核模式" class="headerlink" title="2.3、用户模式和内核模式"></a>2.3、用户模式和内核模式</h5><p>处理器为了安全起见，不至于损坏操作系统，必须限制一个应用程序可执行指令能访问的地址空间范围。就发明了两种模式用户模式和内核模式，其中内核模式（上帝模式）有最高的访问权限，甚至可以停止处理器、改变模式位，或者发起一个I/O操作，处理器使用一个寄存器当作模式位，描述当前进程的特权。进程只有当中断、故障或者陷入系统调用时，才会将模式位设置成上帝模式，得到内核访问权限，其他情况下都始终在用户权限中，就能够保证系统的绝对安全。</p>
+<h5 id="2-4、上下文切换机制"><a href="#2-4、上下文切换机制" class="headerlink" title="2.4、上下文切换机制"></a>2.4、上下文切换机制</h5><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/11.webp" alt=""><br>内核中有一个专门的调度程序，当从进程A切换到进程B的时候，内核调度器为每个进程保存一个上下文状态（运行环境保存）：包含程序计数器、用户栈、状态寄存器等，然后切换到另外一个进程处开始执行。<br>当内核代表用户执行系统调用的时候，就会发生上下文切换，如上图所示，当进程A调用read函数的时候，内核代表进程A开始执行系统调用读取磁盘上的文件，这需要耗费相对很长的时间，处理器这时候不会闲着什么都不做，而是开始一种上下文切换机制，切换到进程B开始执行。当B在用户模式下执行了一段时间，磁盘读取完文件以后发送一个中断信号，将执行进程B到进程A的上下文切换，将控制权返回给进程A系统调用read指令后面的那条指令，继续执行进程A。（注：在切换的临界时间内核模式其实也执行了B一个小段时间）</p>
+<h4 id="3、Linux自己写写关于进程的demo"><a href="#3、Linux自己写写关于进程的demo" class="headerlink" title="3、Linux自己写写关于进程的demo"></a>3、Linux自己写写关于进程的demo</h4><h5 id="3-1、fork（）函数来创建一个新进程"><a href="#3-1、fork（）函数来创建一个新进程" class="headerlink" title="3.1、fork（）函数来创建一个新进程"></a>3.1、fork（）函数来创建一个新进程</h5><p><strong>关于fock函数的巴拉巴拉，如果你困了，请跳过这一大串文字，直接看书上两个demo吧</strong><br>我们使用fork（）函数通过系统调用创建一个与原来进程几乎完全相同的进程，除了PID不同外，子进程可以读写父进程中打开的任何文件。一个进程调用fork（）函数后，系统先给新的进程分配资源，例如存储数据和代码的空间。然后把原来的进程的所有值都复制到新的新进程中，只有少数值与原来的进程的值不同。相当于克隆了一个自己。fork函数有一个特别的地方，虽然只被调用一次，却能返回两次。(fock()函数第一次一次返回是在父进程中，返回的是子进程的PID；一次是在子进程中，返回的是0；因为PID总是非零，返回值为0就说明在子进程中执行了。用来区分，另外Linux下Fock函数定义在unistd.h 中)<br>希望大家自己敲一敲，就算活动活动手指，当作一种运动吧<br><strong>fock函数demo1</strong><br><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/1.png" alt=""><br>（结果出现原因、x在父子进程中是单独成立的，当调用pid = Fork（）；的时候，第一次返回的是进程的子ID，由于不为0，所以继续执行main函数中的printf，打印输出x = 0；第二次就在子进程中执行了，返回的pid为0表示在子进程中执行，由于两个进程有相对独立的地址空间，子进程得到的只是父进程的一个拷贝，所以x的初始值仍然是1，输出的结果就是x=2了。（至于为啥都输出在屏幕上了，是因为这两个进程共享已经被打开的stdout文件，子进程是继承父进程的，因此输出也是指向屏幕的）<br><strong>在csapp516页上一个有意思的题目，询问下面的的输出值，想了好久，我现在直接输出了，你也可以认真想想贼有意思</strong><br><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/2.png" alt=""><br><strong>fock函数demo2,这个图能感受到fock函数</strong><br><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/12.webp" alt=""></p>
+<h5 id="3-2、waitpid函数-sleep函数-pause函数，execve函数等感兴趣的单独查看，这里就不展开了"><a href="#3-2、waitpid函数-sleep函数-pause函数，execve函数等感兴趣的单独查看，这里就不展开了" class="headerlink" title="3.2、waitpid函数,sleep函数,pause函数，execve函数等感兴趣的单独查看，这里就不展开了"></a>3.2、waitpid函数,sleep函数,pause函数，execve函数等感兴趣的单独查看，这里就不展开了</h5><h4 id="4、信号"><a href="#4、信号" class="headerlink" title="4、信号"></a>4、信号</h4><h5 id="4-1、定义"><a href="#4-1、定义" class="headerlink" title="4.1、定义"></a>4.1、定义</h5><p>信号是一种更高层次的软件形式的异常，它允许进程中断其他进程。一个信号就是一个消息，我们列出Linux系统上30个不同种类的信号：正在运行的前台子进程，当键入ctrl-c，发送序号2（SIGINT）；当一个进程发送信号9（SIGKILL）就会强制终止另外一个进程；当子进程终止时，就会发送信号17（SIGCHILD）给父进程。<br><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/13.webp" alt=""></p>
+<h5 id="4-2、举个例子（实战还是比概念看起来爽啊"><a href="#4-2、举个例子（实战还是比概念看起来爽啊" class="headerlink" title="4.2、举个例子（实战还是比概念看起来爽啊"></a>4.2、举个例子（实战还是比概念看起来爽啊</h5><p><img src="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/14.webp" alt=""><br>（ps用来查看所有进程，在windows是-netstat ano）<br>1&gt; 使用/bin/kill程序发送信号(使用完整路径)<br>发送9号（SIGKILL）信号给进程6279终止该进程，如果使用-6279就是该进程组的所有进程；</p>
+<h5 id="4-3、你看到这里应该也累了，信号后面的知识看的不是很懂，如果你真的感兴趣，希望你能自己去看书吧"><a href="#4-3、你看到这里应该也累了，信号后面的知识看的不是很懂，如果你真的感兴趣，希望你能自己去看书吧" class="headerlink" title="4.3、你看到这里应该也累了，信号后面的知识看的不是很懂，如果你真的感兴趣，希望你能自己去看书吧"></a>4.3、你看到这里应该也累了，信号后面的知识看的不是很懂，如果你真的感兴趣，希望你能自己去看书吧</h5><p>（另外书上配套了很多优秀的例子和实验，由于本人才疏学浅，就不把自己的结果展示怕误人子弟，非常安利大家去感受大师的魅力</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/异常控制流-进程/" rel="tag"># 异常控制流&&进程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/06/KMP浅显证明一波/" rel="next" title="KMP浅显证明一波">
+                <i class="fa fa-chevron-left"></i> KMP浅显证明一波
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jangshi.ico" alt="Kitty">
+            
+              <p class="site-author-name" itemprop="name">Kitty</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Kit4y" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="QQ" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#小声bb-几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。"><span class="nav-number">1.</span> <span class="nav-text">小声bb,几天没更博客了，这几天真的过得和狗一样，怪也只能怪自己太把自己高看了，其实只是一个小萌新，在达成48小时从0写完数据结构课设得同时完成了两天两天不的得新成就，昨天验收结束睡了一觉，终于有时间看书了，CSAPP本来觉得看完了，但是翻了翻发现还是很多知识点之前跳过了，罪过罪过，劝告大家一句话“能够完整的看完一本书是一个人受过高等教育的体现”，希望之后的经典书能整本认真看完。</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#异常控制流这章个人感觉精华除了异常外，讲进程的真的精髓"><span class="nav-number"></span> <span class="nav-text">异常控制流这章个人感觉精华除了异常外，讲进程的真的精髓</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1、异常控制流（Exceptional-Contro-Flow）处理过程"><span class="nav-number"></span> <span class="nav-text">1、异常控制流（Exceptional Contro Flow）处理过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、异常表-amp-amp-异常表基地址"><span class="nav-number">1.</span> <span class="nav-text">1.1、异常表&amp;&amp;异常表基地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、四大异常分类"><span class="nav-number">2.</span> <span class="nav-text">1.2、四大异常分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）中断"><span class="nav-number">2.1.</span> <span class="nav-text">（1）中断</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）陷阱和系统调用"><span class="nav-number">2.2.</span> <span class="nav-text">（2）陷阱和系统调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）故障"><span class="nav-number">2.3.</span> <span class="nav-text">（3）故障</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、进程"><span class="nav-number">3.</span> <span class="nav-text">2、进程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1、进程控制流"><span class="nav-number">3.1.</span> <span class="nav-text">2.1、进程控制流</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2、私有地址空间"><span class="nav-number">3.2.</span> <span class="nav-text">2.2、私有地址空间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3、用户模式和内核模式"><span class="nav-number">3.3.</span> <span class="nav-text">2.3、用户模式和内核模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4、上下文切换机制"><span class="nav-number">3.4.</span> <span class="nav-text">2.4、上下文切换机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Linux自己写写关于进程的demo"><span class="nav-number">4.</span> <span class="nav-text">3、Linux自己写写关于进程的demo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1、fork（）函数来创建一个新进程"><span class="nav-number">4.1.</span> <span class="nav-text">3.1、fork（）函数来创建一个新进程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2、waitpid函数-sleep函数-pause函数，execve函数等感兴趣的单独查看，这里就不展开了"><span class="nav-number">4.2.</span> <span class="nav-text">3.2、waitpid函数,sleep函数,pause函数，execve函数等感兴趣的单独查看，这里就不展开了</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、信号"><span class="nav-number">5.</span> <span class="nav-text">4、信号</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1、定义"><span class="nav-number">5.1.</span> <span class="nav-text">4.1、定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2、举个例子（实战还是比概念看起来爽啊"><span class="nav-number">5.2.</span> <span class="nav-text">4.2、举个例子（实战还是比概念看起来爽啊</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3、你看到这里应该也累了，信号后面的知识看的不是很懂，如果你真的感兴趣，希望你能自己去看书吧"><span class="nav-number">5.3.</span> <span class="nav-text">4.3、你看到这里应该也累了，信号后面的知识看的不是很懂，如果你真的感兴趣，希望你能自己去看书吧</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kitty</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
