@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="存储器层次结构,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM,而固态等是ROM,还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。">
+<meta name="keywords" content="存储器层次结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSAPP又双叒叕来一遍之存储器层次结构">
+<meta property="og:url" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/index.html">
+<meta property="og:site_name" content="Kitty萌新的卧室">
+<meta property="og:description" content="再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM,而固态等是ROM,还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/1.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/2.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/3.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/4.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/5.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/6.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/7.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/8.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/9.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/10.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/11.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/12.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/13.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/14.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/15.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/16.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/17.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/17.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/19.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/20.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/21.webp">
+<meta property="og:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/22.webp">
+<meta property="og:updated_time" content="2019-01-13T03:34:12.325Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSAPP又双叒叕来一遍之存储器层次结构">
+<meta name="twitter:description" content="再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM,而固态等是ROM,还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/1.webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/">
+
+
+
+
+
+  <title>CSAPP又双叒叕来一遍之存储器层次结构 | Kitty萌新的卧室</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Kitty萌新的卧室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            友链
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kitty">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/jangshi.ico">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kitty萌新的卧室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSAPP又双叒叕来一遍之存储器层次结构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-13T09:47:22+08:00">
+                2019-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSAPP/" itemprop="url" rel="index">
+                    <span itemprop="name">CSAPP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM-而固态等是ROM-还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。"><a href="#再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM-而固态等是ROM-还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。" class="headerlink" title="再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM,而固态等是ROM,还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。"></a>再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM,而固态等是ROM,还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/1.webp" alt=""><br><a id="more"></a></p>
+<h3 id="1、存储技术"><a href="#1、存储技术" class="headerlink" title="1、存储技术"></a>1、存储技术</h3><h4 id="1-1、随机访问存储器"><a href="#1-1、随机访问存储器" class="headerlink" title="1.1、随机访问存储器"></a>1.1、随机访问存储器</h4><p>静态RAM：（SRAM）用作高速缓存，通常只有几兆，在CPU芯片上、下；硬件设计中，将每个位存在一个双稳定的存储单元中，如下图所示，只有在两边的时候保持稳定性：<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/2.webp" alt=""><br>动态RAM：（DRAM）用作主存（我们通常说的机器的内存），通常几百、几千兆。每个单位使用一个电容和一个访问晶体管构成，容易被干扰，有的加入有纠错码。系统需要周期性读出，然后刷新重写存储器的每一位。DRAM详细构造图：<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/3.webp" alt=""><br><strong>访问示例（我们来看看是如何访问超单元（2，1）处的内容）</strong><br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/4.webp" alt=""><br>为了加快二维数组的访问，存储控制器在读取（2，1）处的内容的时候，使用addr先发送行地址2到DRAM芯片中，拷贝整个第二行的内容到内部缓冲区中，然后发送列地址1，从内部行缓冲区中读取1的地址内容通过data发送到存储控制器中去。<br>有缓存的问题所有这就能解释当初zzz学长解释下面两个循环为什么第一个快于第二个。（赵神牛逼<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/5.webp" alt="图一"><br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/6.webp" alt="图二"></p>
+<h4 id="1-2、存储器模块"><a href="#1-2、存储器模块" class="headerlink" title="1.2、存储器模块"></a>1.2、存储器模块</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/7.webp" alt="图二"><br>如图所示是一个64M的主存，芯片编号0-7，每个芯片存储8M的数据，存储器模块将其组合起来，聚合内存。将每单个芯片的超单元映射成主存地址A的各个字段。这样控制器收到一个主存地址A的时候，存储控制器将其选择包含的具体芯片，将A转换成（i，j）的形式，然后将（i，j）发送到芯片模块中开始取数据。<br><strong>存储在ROM设备中的程序通常称为固件，当一个计算机系统通电以后，它会运行存储在ROM中的固件。</strong></p>
+<h4 id="1-3、访问主存（读事务、写事务）"><a href="#1-3、访问主存（读事务、写事务）" class="headerlink" title="1.3、访问主存（读事务、写事务）"></a>1.3、访问主存（读事务、写事务）</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/8.webp" alt=""><br>读事务：考虑当我们执行，movl A，%eax的情况，地址A的内容会被加载到eax中去，总线发起读事务（分三步）：①CPU将A的地址总线放到系统总线上，桥作为中转点，将地址信号传送到存储器总线上去；②主存感觉到了存储器总线上的地址信号，从存储器总线上读地址，并从主存中取出相应的数据，写入到存储器总线上去，桥将数据专递到系统中线中去；③CPU感觉到了系统总线上的数据，将数据拷贝到eax中。I/O桥作为中转，将地址信号从系统总线转到存储器总线，然后又将数据从存储器总线转到系统总线。在这个过程中，CPU始终是从系统总线上发送地址，读取数据，主存始终是从存储器总线上接受地址并发送数据。（写事务是一个逆向过程不做讲解）</p>
+<h4 id="1-4、磁盘存储-（硬盘）"><a href="#1-4、磁盘存储-（硬盘）" class="headerlink" title="1.4、磁盘存储 （硬盘）"></a>1.4、磁盘存储 （硬盘）</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/9.webp" alt=""><br>磁盘由盘片构成，表面覆盖的有磁性材料，中间是一个主轴，通过旋转读取和记录数据。每组同心圆磁道分割的区域就是一个扇区。扇区之间是有间隙的，如图：<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/10.webp" alt=""><br><strong>磁盘读写操作：</strong><br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/11.webp" alt=""><br>磁盘以扇区为单位来读写数据，对扇区的访问时间由三个部分组成：寻道之间、旋转时间、传送时间。<br>以图a为例，当我们要访问同心圆磁道5的内容时，寻道时间是指传动手臂将读写头移动到同心圆第五磁道的时间，旋转时间指的是同心圆5开始读取内容的位置，如果手臂移动到第五磁道的时候读写位置刚过，就要等磁盘旋转一圈之后再读取；传送时间，扇区第一个位处于读写头的时候，读写该扇区的时间。（寻道时间和旋转延迟大致相当）</p>
+<h3 id="2、局部性"><a href="#2、局部性" class="headerlink" title="2、局部性"></a>2、局部性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">局部性原理是指CPU访问存储器时，无论是存取指令还是存取数据，所访问的存储单元都趋于聚集在一个较小的连续区域中。 –来自百度百科</span><br></pre></td></tr></table></figure>
+<p>我们讲存储器体系结构就会很好的理解局部性，简单的来说，我们的主存就是我们为了提高我们磁盘文件的一个高速缓存，因为我们知道这一时刻访问到磁盘的数据可以下一时刻也会被访问，这一位置被访问的数据，邻居位置也可能会被访问。这也就是我们通常说的：时间局部性和空间局部性。<br>最好的例子就是上面数组求和。可以往前看看。</p>
+<h3 id="3、存储器层次结构"><a href="#3、存储器层次结构" class="headerlink" title="3、存储器层次结构"></a>3、存储器层次结构</h3><h4 id="3-1、书上大图"><a href="#3-1、书上大图" class="headerlink" title="3.1、书上大图"></a>3.1、书上大图</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/12.webp" alt=""><br>越往上，代表的是访问速度越快，当然存储容量小，价格也非常的高。越往下，意味着访问速度越慢，存储容量大，价格相对便宜。通常我们CPU的寄存器是L1的高速缓存，L1是L2的高速缓存，以此类推。</p>
+<h4 id="3-2、缓存命中和不命中"><a href="#3-2、缓存命中和不命中" class="headerlink" title="3.2、缓存命中和不命中"></a>3.2、缓存命中和不命中</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/13.webp" alt=""><br>上图我们把k+1理解为主存，被划分为16个块来存储数据，块的大小是固定的。我们把K层理解成L3高速缓存，任何时刻L3就是主存的一个子集。上图我们能看出，L3只能保存4个块的数据，块的大小保持和主存的大小一样的。上图中我们看到，L3中保存的是主存中的4，9，14，3的数据。那么什么又是命中率和不命中率呢？<br><strong>缓存命中</strong>：当程序需要第k+1层数据块14的时候，程序会在当前存储的k层，寻找块14的数据，刚好14在k层的话，就是一个缓存命中，这比从k+1层读取的速度要快很多。<br><strong>缓存不命中</strong>：当程序需要访问到块12的时候，在k层没有该数据块，就是一个缓存不命中，这时候就会从k+1层中读取块12将其替换到k层的一个数据块（覆盖或驱逐一个已有的数据块）。程序还是从k层访问块12。<br><strong>放置策略</strong>：如果我们从k+1层中获得的数据随机的放置在k层，这样的随机放置就会导致访问的效率降低，我们的放置策略是块i必须放置在（imod4）中，也就是0，4，8，12会映射到同一个k层的块0中。这就会导致一个冲突不命中，也就是说如果程序交替请求k+1层的0，4块，由于会一直映射到k层的0块中，这时候虽然k层有空余的缓存，但还是每次不命中。</p>
+<h4 id="3-3、类比一下web的缓存"><a href="#3-3、类比一下web的缓存" class="headerlink" title="3.3、类比一下web的缓存"></a>3.3、类比一下web的缓存</h4><p>web缓存是通过http头中的上次If-Modified-Since或者If-Unmodified-Since使用对比上次修改时间验证资源是否需要更新，当访问一个网页，网页如果在本地有缓存其实并不是直接使用缓存中的page因为你要保证服务器没变化，所以本机还是会发生一个请求询问服务器该界面最后一次修改的时间，服务器只要返回时间就可以而不必要返回内容，如果服务器上网页的修改时间是缓存时间之前的，那直接使用缓存的，如果缓存之后的服务器修改了，将重新请求网页。</p>
+<h3 id="4、高速缓存存储器（集成在CPU内部的一个部件L1、L2、L3三级缓存）"><a href="#4、高速缓存存储器（集成在CPU内部的一个部件L1、L2、L3三级缓存）" class="headerlink" title="4、高速缓存存储器（集成在CPU内部的一个部件L1、L2、L3三级缓存）"></a>4、高速缓存存储器（集成在CPU内部的一个部件L1、L2、L3三级缓存）</h3><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/14.webp" alt=""></p>
+<h4 id="4-1、通用高速缓存存储器内部结构"><a href="#4-1、通用高速缓存存储器内部结构" class="headerlink" title="4.1、通用高速缓存存储器内部结构"></a>4.1、通用高速缓存存储器内部结构</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/15.webp" alt=""><br>高速缓存是一个数组，每个组包含一个或多个行，每个行有一个有效位、一个标记位，以及数据块。我们进行访问的地址结构就是：t的标记位+s个组索引+b个块偏移；<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/16.webp" alt=""></p>
+<h4 id="4-2、直接映射高速缓存（每个组只有一行的简单访问模式）"><a href="#4-2、直接映射高速缓存（每个组只有一行的简单访问模式）" class="headerlink" title="4.2、直接映射高速缓存（每个组只有一行的简单访问模式）"></a>4.2、直接映射高速缓存（每个组只有一行的简单访问模式）</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/17.webp" alt=""><br>(举例：直接映射高速缓存的抽取请求字的过程就像我们投递快件一样，组索引其实就像我们的邮政编码，比如我们这里的510824，然后找到编码的组，也就是我的大位置（xx县），然后看标记上写的具体xx小区x栋楼，并且核实该地址是否有效（有效位1），两项都满足条件以后将该快件给快递员投递，快递员到达具体xx小区x楼的时候就根据门牌号（偏移位）敲开你家的门。binggo，快递到达）<br>高速缓存确定一个请求是否命中，然后抽出请求字的过程分两步：<br><strong>1&gt; 组选择</strong>：很好理解，就是地址位中的组索引匹配高速缓存中的组<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/17.webp" alt=""><br><strong>2&gt; 行匹配和字抽取</strong>：行匹配主要是对有效位进行匹配，和标记位与高速缓存中的标记位一致，这就是一个命中。最后的字抽取就简单了，只是看地址后面的偏移值。<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/19.webp" alt=""></p>
+<h4 id="4-3、结构剖析（真正意义上的高速缓存）"><a href="#4-3、结构剖析（真正意义上的高速缓存）" class="headerlink" title="4.3、结构剖析（真正意义上的高速缓存）"></a>4.3、结构剖析（真正意义上的高速缓存）</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/20.webp" alt=""><br><strong>Intel Core I7高速缓存层次结构</strong><br>在实际的商用CPU中，将高速缓存分为d-cache数据高速缓存，i-cache指令高速缓存和同一的高速缓存，i7的架构中我们可以看出，L1分为数据和指令高速缓存，共享L2高速缓存，同时每个核共享L3高速缓存</p>
+<h4 id="5、存储器山图♂"><a href="#5、存储器山图♂" class="headerlink" title="5、存储器山图♂"></a>5、存储器山图♂</h4><p><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/21.webp" alt=""><br>存储器的性能不能简单的用一个数字来描述，如果实在要形容的话，是一座时间局部性和空间局部性构成的山。山峰和低谷的差别不是一个数量级。明智的程序员会试图构造运行在山峰的程序而不是低谷。我们来看看这座存储器山是啥意思。<br><img src="/2019/01/13/CSAPP又双叒叕来一遍之存储器层次结构/22.webp" alt=""><br>这段代码所做的事情，就是将data数组的内容依次读取到CPU的寄存器中。其中elems代表的是data的工作集大小也就是size时间局部性，代表Y轴；而stride（步长）代表的是横轴X；Z轴表示吞吐量，Mb/s。越往上吞吐量越大（红色部分）。我们反复以不同的size和stride值调用我们的核心测试代码，就会得到如上图的存储器山。最高处的红色山峰为L1，由于工作集（size）很小，能全部保存在L1高速缓存中，所以这时候即使stride很长，对于性能也没太大的影响。L2和L3、主存随着stride的增加有明显的坡度，空间局部性下降。特别明显的是，主存的蓝色山峰，即使工作集很大（时间局部性极地）其stride（空间局部性）的影响也相当的明显，最高与最低处相差7倍。也就是告诫我们，即使时间局部性无法改变了，空间局部性也可以使得程序的性能极大的提高。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/存储器层次结构/" rel="tag"># 存储器层次结构</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/11/CSAPP又双叒叕来一遍之异常控制流/" rel="next" title="CSAPP又双叒叕来一遍之异常控制流">
+                <i class="fa fa-chevron-left"></i> CSAPP又双叒叕来一遍之异常控制流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/jangshi.ico" alt="Kitty">
+            
+              <p class="site-author-name" itemprop="name">Kitty</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Kit4y" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="QQ" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM-而固态等是ROM-还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。"><span class="nav-number">1.</span> <span class="nav-text">再安利一波csapp真优秀，本章之后你会了解内存，机械硬盘，固态硬盘等储存器的优劣原理，你会理解为什么只有机械硬盘的笔记本升级到固态就脱胎换骨了一番，内存是DRAM,而固态等是ROM,还有就是局部性的哲学。通过学习高速缓存，理解程序的局部性的真正意义（你还能看到csapp第三版封面的图是啥玩意。</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#1、存储技术"><span class="nav-number"></span> <span class="nav-text">1、存储技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1、随机访问存储器"><span class="nav-number">1.</span> <span class="nav-text">1.1、随机访问存储器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2、存储器模块"><span class="nav-number">2.</span> <span class="nav-text">1.2、存储器模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3、访问主存（读事务、写事务）"><span class="nav-number">3.</span> <span class="nav-text">1.3、访问主存（读事务、写事务）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4、磁盘存储-（硬盘）"><span class="nav-number">4.</span> <span class="nav-text">1.4、磁盘存储 （硬盘）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、局部性"><span class="nav-number"></span> <span class="nav-text">2、局部性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、存储器层次结构"><span class="nav-number"></span> <span class="nav-text">3、存储器层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1、书上大图"><span class="nav-number">1.</span> <span class="nav-text">3.1、书上大图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2、缓存命中和不命中"><span class="nav-number">2.</span> <span class="nav-text">3.2、缓存命中和不命中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3、类比一下web的缓存"><span class="nav-number">3.</span> <span class="nav-text">3.3、类比一下web的缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、高速缓存存储器（集成在CPU内部的一个部件L1、L2、L3三级缓存）"><span class="nav-number"></span> <span class="nav-text">4、高速缓存存储器（集成在CPU内部的一个部件L1、L2、L3三级缓存）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1、通用高速缓存存储器内部结构"><span class="nav-number">1.</span> <span class="nav-text">4.1、通用高速缓存存储器内部结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2、直接映射高速缓存（每个组只有一行的简单访问模式）"><span class="nav-number">2.</span> <span class="nav-text">4.2、直接映射高速缓存（每个组只有一行的简单访问模式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3、结构剖析（真正意义上的高速缓存）"><span class="nav-number">3.</span> <span class="nav-text">4.3、结构剖析（真正意义上的高速缓存）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、存储器山图♂"><span class="nav-number">4.</span> <span class="nav-text">5、存储器山图♂</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kitty</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>  
+  <script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/miku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
